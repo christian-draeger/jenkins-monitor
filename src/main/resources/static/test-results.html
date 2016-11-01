@@ -1,0 +1,93 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Jenkins Test Results</title>
+    <link href="css/css.css" rel="stylesheet">
+    <link href="css/animations.css" rel="stylesheet">
+    <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96">
+  </head>
+  <body class="dashboard">
+
+    <h1 id="slide"></h1>
+
+    <script src="js/jquery.min.js"></script>
+    <script src="js/alert.js"></script>
+
+    <div id="alerts"></div>
+    <div id="noParam"></div>
+
+    <div class="zoomIn animated no-fails" id="noFails">
+      <span class="glyphicon glyphicon-ok"></span>
+      <p>no failing tests</p>
+    </div>
+
+
+    <!------------------------------------------------ Modal window --------------------------------------- -->
+
+    <div class="config-info">
+
+      <span class="glyphicon glyphicon-cog boardConfig" data-toggle="modal" data-target="#boardConfig" title="Board Config"></span>
+
+      <!-- config Modal -->
+      <div class="modal fade" id="boardConfig" role="dialog">
+        <div class="modal-dialog">
+
+          <!-- config Modal content-->
+          <div class="modal-content">
+            <div class="modal-header" id="config-modal-header"></div>
+
+            <div class="modal-body" id="config-modal-body">
+              <form action="">
+                <label>
+                  <input type="checkbox" name="showSuccessfulJobs"/><span class="glyphicon"></span>&nbsp;show successful jobs
+                </label>
+                <hr>
+                <label>
+                  <input type="checkbox" name="showBuildingJobs"/><span class="glyphicon"></span>&nbsp;show building jobs
+                </label>
+                <hr>
+                <label>
+                  <input type="checkbox" name="showAbortedJobs"/><span class="glyphicon"></span>&nbsp;show aborted jobs
+                </label>
+                <hr>
+                <label>
+                  <input type="checkbox" name="showBuildNumber"/><span class="glyphicon"></span>&nbsp;show build number
+                </label>
+                <hr>
+                <label>
+                  <input type="checkbox" name="showSuccessVsFail"/><span class="glyphicon"></span>&nbsp;show success vs fail count
+                </label>
+                <hr>
+                <label>
+                  <input type="checkbox" name="showTimestamp"/><span class="glyphicon"></span>&nbsp;show timestamp
+                </label>
+                <hr>
+                <label>
+                  <input type="checkbox" name="showEffects"/><span class="glyphicon"></span>&nbsp;show effects
+                </label>
+                <hr>
+                <label>
+                  reload board every <input type="text" name="reload" value=""> seconds
+                </label>
+                <hr>
+                <label>
+                  red panel if <input type="text" name="percent" value="">% of tests fail
+                </label>
+              </form>
+
+            </div>
+
+            <div class="modal-footer">
+              <button class="btn-success"><span class="glyphicon glyphicon-ok"></span></button>
+            </div>
+          </div>
+
+        </div>
+      </div>
+      <span class="glyphicon colSwitch" id="cols" title="number of columns"></span>
+    </div>
+    <div id="job-count"></div>
+
+    <script src="js/bootstrap.js"></script>
+  </body>
+</html>

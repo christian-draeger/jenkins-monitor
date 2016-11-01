@@ -1,0 +1,52 @@
+{
+  "jobs": {
+    "jenkinsCore": [
+      {
+        "name": "Core/job/jenkins/job/master",
+        "message": "Master Build",
+        "sub": "core"
+      },
+      {
+        "name": "IPC_verify-0-snapshot_legacy-and-web-master",
+        "message": "Unit tests - legacy and web",
+        "sub": "jUnit"
+      },
+      {
+        "h1": "Jenkins Core<br><span style='font-size:35px;color:#555'>you can put some text here</span>",
+        "jenkinsUrl": "https://ci.jenkins.io/"
+      }
+    ],
+    "jenkinsInfra": [
+      {
+        "name": "Infrastructure/job/jenkins-infra/job/production",
+        "message": "Infra Pipeline",
+        "sub": "production"
+      },
+      {
+        "name": "Infrastructure/job/jenkins-infra/job/staging",
+        "message": "Infra Pipeline",
+        "sub": "staging"
+      },
+      {
+        "name": "Infrastructure/job/javadoc",
+        "message": "javadoc",
+        "sub": ""
+      },
+      {
+        "h1": "tests against Release",
+        "jenkinsUrl": "https://ci.jenkins.io"
+      }
+    ]
+  },
+  "webServiceAdress": "localhost:8282",
+  "danger": [
+      {
+        "percentage": 40,
+        "byPercentage": true
+      },
+      {
+        "byJobContainsString": "verify",
+        "containsString": true
+      }
+  ]
+}
