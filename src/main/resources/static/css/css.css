@@ -297,8 +297,8 @@ span.alert-badge-abort{
 
 .alert-dashboard-two-cols span[class^="alert-badge-"] {
   display: inline-block;
-  min-width: 200px;
-  font-size: 1.4em;
+  min-width: 150px;
+  font-size: 1.0em;
   font-weight: bold;
   float: left;
   white-space: nowrap;

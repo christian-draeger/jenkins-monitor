@@ -308,7 +308,7 @@ $(document).ready(function(){
         if (getResult(data) == "hasNumbers" && localStorage.getItem("showSuccessVsFail-" + environment) == "false"){
             return getFailCount(data) + '<sub>/' + getTotalCount(data) + '</sub>';
         } else if (getResult(data) == "hasNumbers" && localStorage.getItem("showSuccessVsFail-" + environment) == "true"){
-            return getPassCount(data) + '<sup>+</sup> ' + getFailCount(data) + '<sup>-</sup>';
+            return getPassCount(data) + '<sup>+</sup>/' + getFailCount(data) + '<sup>-</sup>';
         } else if (getResult(data) == "success") {
             return '<span class="glyphicon glyphicon-ok"></span>';
         } else if (getResult(data) == "failure") {
