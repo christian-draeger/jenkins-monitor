@@ -1,5 +1,7 @@
 package de.idealo.jenkinsFetcher;
 
+import static java.lang.System.setProperty;
+
 import java.io.IOException;
 
 import org.apache.http.HttpStatus;
@@ -62,6 +64,10 @@ public class JenkinsDataFetcher {
     }
 
     private String getResponseAsString(final String url){
+
+        setProperty("javax.net.ssl.trustStore", "/etc/ssl/certs/java/cacerts");
+
+        Unirest.setTimeouts(3000, 1000);
 
         try {
             HttpResponse<String> response = Unirest
