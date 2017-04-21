@@ -25,14 +25,14 @@ public class JenkinsDataFetcher {
     final String jenkinsTreeWithTestReport = "?passCount,skipCount,failCount,totalCount";
     final String jenkinsTreeWithoutTestReport = "?building,duration,fullDisplayName,id,number,result,timestamp,url,description,changeSet[items[author[fullName]]]";
 
+    JenkinsElement jenkinsElement = new JenkinsElement();
+    ObjectMapper mapper = new ObjectMapper();
 
     public JenkinsElement getJenkinsData(final String jobName, final String jenkinsUrl) throws IOException {
 
         String jenkinsApiUrlWithTestReports = jenkinsUrl + "/job/" + jobName + "/lastBuild/testReport/api/json" + jenkinsTreeWithTestReport;
         String jenkinsApiUrlWithoutTestReports = jenkinsUrl + "/job/" + jobName + "/lastBuild/api/json" + jenkinsTreeWithoutTestReport;
 
-        JenkinsElement jenkinsElement = new JenkinsElement();
-        ObjectMapper mapper = new ObjectMapper();
         JenkinsModel jenkinsModel;
 
         String responseLastBuildJsonAsString = getResponseAsString(jenkinsApiUrlWithoutTestReports);

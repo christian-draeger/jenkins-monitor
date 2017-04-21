@@ -1,10 +1,60 @@
 {
   "jobs": {
-    "jenkinsCore": [
+    "master": [
       {
-        "name": "Core/job/jenkins/job/master",
-        "message": "Master Build",
-        "sub": "core"
+        "name": "IPC_master-deployment-testing_bx138",
+        "message": "Deployment bx138",
+        "sub": "testing"
+      },
+      {
+        "name": "IPC_master-deployment-qa-cluster_resin4",
+        "message": "Deployment resin4-qa cluster",
+        "sub": "staging"
+      },
+      {
+        "name": "IPC_web-master_verify",
+        "message": "Unit-tests IPC/WEB",
+        "sub": "jUnit"
+      },
+      {
+        "name": "IPC_legacy-master_verify",
+        "message": "Unit-tests IPC/legacy",
+        "sub": "jUnit"
+      },
+      {
+        "name": "IPC_master_AcceptanceTests",
+        "message": "Selenium Tests",
+        "sub": "PhantomJS"
+      },
+      {
+        "name": "IPC_master-tracker-integration_test",
+        "message": "Tracker-Integration-Tests",
+        "sub": ""
+      },
+      {
+        "name": "IPC_master_smoketest-resin4",
+        "message": "Smoketests",
+        "sub": ""
+      },
+      {
+        "name": "IPC_master_AcceptanceTestsSauceLabs",
+        "message": "Selenium Tests",
+        "sub": "SauceLabs"
+      },
+      {
+        "name": "IPC_master_PageContentTests",
+        "message": "Page-Content-Tests",
+        "sub": "jSoup"
+      },
+      {
+        "name": "IPC_master-cms_integration-tests",
+        "message": "CMS Integration-Tests",
+        "sub": "restAssured"
+      },
+      {
+        "name": "IPC_master-ipc-site_integration-tests",
+        "message": "IPC-Site Integration-Tests",
+        "sub": "restAssured"
       },
       {
         "name": "IPC_verify-0-snapshot_legacy-and-web-master",
@@ -12,33 +62,101 @@
         "sub": "jUnit"
       },
       {
-        "h1": "Jenkins Core<br><span style='font-size:35px;color:#555'>you can put some text here</span>",
-        "jenkinsUrl": "https://ci.jenkins.io/"
+        "h1": "tests against master<br><span style='font-size:35px;color:#555'>(running every 2 hours)</span>",
+        "jenkinsUrl": "http://build-ipc.eu.idealo.com:8080/jenkins/"
       }
     ],
-    "jenkinsInfra": [
+    "nightly": [
       {
-        "name": "Infrastructure/job/jenkins-infra/job/production",
-        "message": "Infra Pipeline",
-        "sub": "production"
+        "name": "NIGHTLY_deploy-static-resources_to-image-server",
+        "message": "Deploy static resources",
+        "sub": "image server"
       },
       {
-        "name": "Infrastructure/job/jenkins-infra/job/staging",
-        "message": "Infra Pipeline",
+        "name": "NIGHTLY_staging-release-deployment-and-smoketests_sx379",
+        "message": "Release-Deployment on sx379",
         "sub": "staging"
       },
       {
-        "name": "Infrastructure/job/javadoc",
-        "message": "javadoc",
-        "sub": ""
+        "name": "NIGHTLY_acceptance_Tests",
+        "message": "Selenium Tests",
+        "sub": "SauceLabs"
+      },
+      {
+        "name": "NIGHTLY_cms_integration-tests",
+        "message": "CMS Integration-Tests",
+        "sub": "restAssured"
+      },
+      {
+        "name": "NIGHTLY_ipc-site_integration-tests",
+        "message": "IPC-Site Integration-Tests",
+        "sub": "restAssured"
+      },
+      {
+        "name": "NIGHTLY_pagecontent_Tests",
+        "message": "Page-Content-Tests / WEB",
+        "sub":"jSoup"
+      },
+      {
+        "name": "NIGHTLY_cms_pagecontent-tests",
+        "message": "Page-Content-Tests / CMS",
+        "sub":"jSoup"
+      },
+      {
+        "name": "NIGHTLY_staging-release-smoketests_sx379",
+        "message": "Smoketests",
+        "sub":""
+      },
+      {
+        "name": "NIGHTLY_tracker-integration-test_sx379",
+        "message": "Tracker Integration Tests",
+        "sub":""
       },
       {
         "h1": "tests against Release",
+        "jenkinsUrl": "http://build-ipc.eu.idealo.com:8080/jenkins/"
+      }
+    ],
+    "jenkinsIo": [
+      {
+        "name": "Core/job/jenkins_master",
+        "message": "jenkins master",
+        "sub": "Core"
+      },
+      {
+        "name": "Core/job/jenkins_lts",
+        "message": "jenkins LTS",
+        "sub": "Core"
+      },
+      {
+        "name": "Core/job/jenkins_2.0",
+        "message": "jenkins 2.0",
+        "sub": "Core"
+      },
+      {
+        "name": "Infrastructure/job/jenkins-infra/branch/staging",
+        "message": "verify branch (staging)",
+        "sub": "Infra"
+      },
+      {
+        "name": "Infrastructure/job/jenkins-infra/branch/production",
+        "message": "verify branch (production)",
+        "sub": "Infra"
+      },
+      {
+        "name": "Reporting/job/backend-plugin-report-card",
+        "message": "report card",
+        "sub": "backend plugin"
+      },
+      {
+        "h1": "Jenkins.io example Board<br><span style='font-size:35px;color:#555'>(monitoring jobs of the jenkins project)</span>",
         "jenkinsUrl": "https://ci.jenkins.io"
       }
     ]
   },
   "webServiceAdress": "localhost:8282",
+  "webServiceAdress1": "172.29.12.195:8282",
+  "webServiceAdress2": "172.29.0.106:8282",
   "danger": [
       {
         "percentage": 40,
