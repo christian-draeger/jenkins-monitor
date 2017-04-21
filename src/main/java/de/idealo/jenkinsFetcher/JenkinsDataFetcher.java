@@ -24,19 +24,25 @@ public class JenkinsDataFetcher {
 
     final String jenkinsTreeWithTestReport = "?passCount,skipCount,failCount,totalCount";
     final String jenkinsTreeWithoutTestReport = "?building,duration,fullDisplayName,id,number,result,timestamp,url,description,changeSet[items[author[fullName]]]";
+    String jenkinsApiUrlWithTestReports;
+    String jenkinsApiUrlWithoutTestReports;
 
     JenkinsElement jenkinsElement = new JenkinsElement();
     ObjectMapper mapper = new ObjectMapper();
 
+    JenkinsModel jenkinsModel;
+
+    String responseLastBuildJsonAsString;
+    String responseLastBuildTestReportsJsonAsString;
+
     public JenkinsElement getJenkinsData(final String jobName, final String jenkinsUrl) throws IOException {
 
-        String jenkinsApiUrlWithTestReports = jenkinsUrl + "/job/" + jobName + "/lastBuild/testReport/api/json" + jenkinsTreeWithTestReport;
-        String jenkinsApiUrlWithoutTestReports = jenkinsUrl + "/job/" + jobName + "/lastBuild/api/json" + jenkinsTreeWithoutTestReport;
+        jenkinsApiUrlWithTestReports = jenkinsUrl + "/job/" + jobName + "/lastBuild/testReport/api/json" + jenkinsTreeWithTestReport;
+        jenkinsApiUrlWithoutTestReports = jenkinsUrl + "/job/" + jobName + "/lastBuild/api/json" + jenkinsTreeWithoutTestReport;
 
-        JenkinsModel jenkinsModel;
 
-        String responseLastBuildJsonAsString = getResponseAsString(jenkinsApiUrlWithoutTestReports);
-        String responseLastBuildTestReportsJsonAsString = getResponseAsString(jenkinsApiUrlWithTestReports);
+        responseLastBuildJsonAsString = getResponseAsString(jenkinsApiUrlWithoutTestReports);
+        responseLastBuildTestReportsJsonAsString = getResponseAsString(jenkinsApiUrlWithTestReports);
 
 
             jenkinsModel = mapper.readValue(responseLastBuildJsonAsString, JenkinsModel.class);
