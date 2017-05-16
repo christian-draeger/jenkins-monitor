@@ -363,6 +363,46 @@ div#alerts :nth-child(odd) .alert-dashboard-two-cols {
   padding-right: 25px;
 }
 
+.success-theme2 {
+  background-color: #48b6bc;
+  border-color: #48b6bc;
+  color: #ffffff;
+  text-align: left;
+  padding-right: 25px;
+}
+
+.abort-theme2 {
+  background-color: #666666;
+  border-color: #666666;
+  color: #ffffff;
+  text-align: left;
+  padding-right: 25px;
+}
+
+.info-theme2 {
+  background-color: #3498db;
+  border-color: #3498db;
+  color: #ffffff;
+  text-align: left;
+  padding-right: 25px;
+}
+
+.warning-theme2 {
+  background-color: #f39c12;
+  border-color: #f39c12;
+  color: #ffffff;
+  text-align: left;
+  padding-right: 25px;
+}
+
+.danger-theme2 {
+  background-color: #c952e7;
+  border-color: #c952e7;
+  color: #ffffff;
+  text-align: left;
+  padding-right: 25px;
+}
+
 .no-fails {
   color: #ffffff; 
   display: none;

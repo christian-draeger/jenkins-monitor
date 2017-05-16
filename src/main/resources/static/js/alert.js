@@ -3,6 +3,7 @@ $(document).ready(function(){
 	var failingJobs = false;
     var buildingJobs = false;
     var abortedJobs = false;
+    var theme;
     
     var $configContainer = $('#boardConfig'),
         $configForm = $configContainer.find('.modal-body form'),
@@ -85,14 +86,15 @@ $(document).ready(function(){
 
 				var boardInfoPosition = config.jobs[boardName].length - 1;
 				var jenkinsUrl = config.jobs[boardName][boardInfoPosition].jenkinsUrl;
-
+                theme = config.jobs[getBoardName(numberOfBoard)][boardInfoPosition].theme;
                 getTestResults(numberOfBoard, jenkinsUrl, boardName);
 
                 getHeadlineOfBoard(config, boardName);
 
+
             }
 
-			else if(environment == ""){
+			else if(environment === ""){
 				$('#noParam').html("you need to select a board:<br>");
 
 				for (var i = 0; i < boards.length; i++) {
@@ -107,7 +109,7 @@ $(document).ready(function(){
 
 
 		function getJobResult(jobName, message, sub, boardName, jenkinsUrl){
-			var commonPath = "http://" + config.webServiceAdress + "/jenkins?jenkinsUrl=" + jenkinsUrl + "&job=";
+			var commonPath = config.webServiceAdress + "/jenkins?jenkinsUrl=" + jenkinsUrl + "&job=";
             var url = commonPath + jobName;
 
             $.getJSON(url, function(jenkinsData) {
@@ -182,7 +184,6 @@ $(document).ready(function(){
         }
 
 
-
 	}
 
     /********************************* start config modal *********************************/
@@ -218,10 +219,17 @@ $(document).ready(function(){
 	// level can be "warning", "danger", "success" and "info"
 	function getAlertPanelTemplate(data, level, message, sub, jobName, jenkinsUrl, boardName){
         var alertClass = "alert-dashboard ";
+
+        var panelLevel = level;
+        if(theme === "theme2") {
+            panelLevel = level + "-theme2";
+        }
+
+
         if (localStorage.getItem("showOneColumn-" + boardName) == "false") alertClass = "alert-dashboard-two-cols ";
 		$("#alerts").append(
 			'<a href="' + jenkinsUrl + '/job/' + jobName + '" target="_blank">' +
-			'<div class="' + alertEffects(boardName)+ alertClass + level + '" title="' + jobName + '">' +
+			'<div class="' + alertEffects(boardName)+ alertClass + panelLevel + '" title="' + jobName + '">' +
 			'<span class="alert-badge-' + level + '">' +
 			getResultMarkUp(data) + '</span><b><span>' + message + '</span><sub class="framework-' + level + '"><i>' + sub + '</i></sub></b>' +
             '<span class="meta-data">' + showBuildTime(data, level, boardName) + showBuildNumber(data, boardName) + '</span></span></div></a>');

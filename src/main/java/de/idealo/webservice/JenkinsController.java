@@ -26,7 +26,7 @@ public class JenkinsController {
     @RequestMapping(value = "/jenkins", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public JenkinsElement jenkinsResults(
             @RequestParam(value = "job") final String jobName,
-            @RequestParam(value = "jenkinsUrl", defaultValue = "http://build-ipc.ipx:8080/jenkins") final String jenkinsUrl) throws IOException {
+            @RequestParam(value = "jenkinsUrl") final String jenkinsUrl) throws IOException {
         return jenkinsDataFetcher.getJenkinsData(jobName, jenkinsUrl);
     }
 }

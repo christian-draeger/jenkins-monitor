@@ -1,15 +1,17 @@
 package de.idealo.jenkinsFetcher;
 
+import static com.jayway.restassured.RestAssured.given;
 import static java.lang.System.setProperty;
 
 import java.io.IOException;
 
-import org.apache.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.mashape.unirest.http.HttpResponse;
-import com.mashape.unirest.http.Unirest;
+import com.jayway.restassured.RestAssured;
+import com.jayway.restassured.builder.RequestSpecBuilder;
+import com.jayway.restassured.config.SSLConfig;
+import com.jayway.restassured.specification.RequestSpecification;
 
 import de.idealo.webservice.JenkinsModel;
 
@@ -22,10 +24,10 @@ import lombok.extern.slf4j.Slf4j;
 @Service
 public class JenkinsDataFetcher {
 
-    final String jenkinsTreeWithTestReport = "?passCount,skipCount,failCount,totalCount";
-    final String jenkinsTreeWithoutTestReport = "?building,duration,fullDisplayName,id,number,result,timestamp,url,description,changeSet[items[author[fullName]]]";
+    private static final String jenkinsTreeWithTestReport = "?passCount,skipCount,failCount,totalCount";
+    private static final String jenkinsTreeWithoutTestReport = "?building,duration,fullDisplayName,id,number,result,timestamp,url,description,changeSet[items[author[fullName]]]";
 
-    ObjectMapper mapper = new ObjectMapper();
+    private ObjectMapper mapper = new ObjectMapper();
 
     public JenkinsElement getJenkinsData(final String jobName, final String jenkinsUrl) throws IOException {
 
@@ -65,25 +67,16 @@ public class JenkinsDataFetcher {
 
         setProperty("javax.net.ssl.trustStore", "/etc/ssl/certs/java/cacerts");
 
-        Unirest.setTimeouts(3000, 1000);
-
-        try {
-            HttpResponse<String> response = Unirest
-                    .get(url)
-                    .asString();
-
-            // log.info("asking jenkins for " + url);
-
-            if (response.getStatus() == HttpStatus.SC_OK) {
-                return response.getBody();
-            }
-
-        } catch (Exception e) {
-            log.error("UniRest Exception", e);
+        RequestSpecification requestSpec = new RequestSpecBuilder().setConfig(
+                RestAssured.config().sslConfig(SSLConfig.sslConfig().relaxedHTTPSValidation()))
+                .build();
+        String body = given(requestSpec)
+                .get(url)
+                .asString();
+        if (body.contains("HTTP Status 404")) {
             return "{\"error\":\"jenkins not reachable\"}";
         }
-
-        return "{}";
+        return body;
     }
 
 }
