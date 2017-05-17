@@ -26,8 +26,8 @@ $(document).ready(function(){
     $configContainer.find('.modal-footer button').on("click", function () {
         localStorage.setItem("reload-" + environment, $('input[type="text"][name="reload"]').val());
         localStorage.setItem("dangerPercentage-" + environment, $('input[type="text"][name="percent"]').val());
-        console.log("test");
         localStorage.setItem("panelTheme-" + environment, $('select[name="panelTheme"] option:selected').val());
+        localStorage.setItem("panelEffect-" + environment, $('select[name="panelEffect"] option:selected').val());
         config("set");
 
         location.reload();
@@ -394,7 +394,7 @@ $(document).ready(function(){
         var buildNumber = 'showBuildNumber-' + boardName;
         var successVsFail = 'showSuccessVsFail-' + boardName;
         var buildTime = 'showTimestamp-' + boardName;
-        var effects = 'showEffects-' + boardName;
+        var panelEffect = 'panelEffect-' + boardName;
         var oneCol = 'showOneColumn-' + boardName;
         var reload = 'reload-' + boardName;
         var percent = 'dangerPercentage-' + boardName;
@@ -418,9 +418,6 @@ $(document).ready(function(){
         if (localStorage.getItem(buildTime) == undefined) {
             localStorage.setItem(buildTime, true);
         }
-        if (localStorage.getItem(effects) == undefined) {
-            localStorage.setItem(effects, true);
-        }
         if (localStorage.getItem(oneCol) == undefined) {
             localStorage.setItem(oneCol, true);
         }
@@ -433,6 +430,11 @@ $(document).ready(function(){
             localStorage.setItem(panelTheme, "Theme1");
         }
         $('select[name="panelTheme"]').val(localStorage.getItem("panelTheme-" + environment));
+
+        if (localStorage.getItem(panelEffect) == undefined) {
+            localStorage.setItem(panelEffect, "flipInX");
+        }
+        $('select[name="panelEffect"]').val(localStorage.getItem("panelEffect-" + environment));
 
         if (localStorage.getItem(percent) == undefined) {
             localStorage.setItem(percent, 40);
@@ -452,11 +454,9 @@ $(document).ready(function(){
     }
 
     function alertEffects(boardName) {
-        if (localStorage.getItem('showEffects-' + boardName) == "true"){
-            // return "slideInRight animated ";
-            return "flipInX animated ";
-        }
-        return "";
+        var effect = localStorage.getItem('panelEffect-' + boardName);
+        effect = effect + " animated ";
+        return effect;
     }
 
     /********************************* end configuration *********************************/
