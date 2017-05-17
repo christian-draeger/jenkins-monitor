@@ -4,7 +4,7 @@ $(document).ready(function(){
     var buildingJobs = false;
     var abortedJobs = false;
     var theme;
-    
+
     var $configContainer = $('#boardConfig'),
         $configForm = $configContainer.find('.modal-body form'),
         $configOptions = $configForm.find('input[type="checkbox"]'),
@@ -26,6 +26,8 @@ $(document).ready(function(){
     $configContainer.find('.modal-footer button').on("click", function () {
         localStorage.setItem("reload-" + environment, $('input[type="text"][name="reload"]').val());
         localStorage.setItem("dangerPercentage-" + environment, $('input[type="text"][name="percent"]').val());
+        console.log("test");
+        localStorage.setItem("panelTheme-" + environment, $('select[name="panelTheme"] option:selected').val());
         config("set");
 
         location.reload();
@@ -86,7 +88,7 @@ $(document).ready(function(){
 
 				var boardInfoPosition = config.jobs[boardName].length - 1;
 				var jenkinsUrl = config.jobs[boardName][boardInfoPosition].jenkinsUrl;
-                theme = config.jobs[getBoardName(numberOfBoard)][boardInfoPosition].theme;
+                theme = localStorage.getItem("panelTheme-" + environment);
                 getTestResults(numberOfBoard, jenkinsUrl, boardName);
 
                 getHeadlineOfBoard(config, boardName);
@@ -220,11 +222,7 @@ $(document).ready(function(){
 	function getAlertPanelTemplate(data, level, message, sub, jobName, jenkinsUrl, boardName){
         var alertClass = "alert-dashboard ";
 
-        var panelLevel = level;
-        if(theme === "theme2") {
-            panelLevel = level + "-theme2";
-        }
-
+        var panelLevel = level + theme;
 
         if (localStorage.getItem("showOneColumn-" + boardName) == "false") alertClass = "alert-dashboard-two-cols ";
 		$("#alerts").append(
@@ -400,6 +398,7 @@ $(document).ready(function(){
         var oneCol = 'showOneColumn-' + boardName;
         var reload = 'reload-' + boardName;
         var percent = 'dangerPercentage-' + boardName;
+        var panelTheme = 'panelTheme-' + boardName;
 
         if (localStorage.getItem(success) == undefined){
             localStorage.setItem(success, false);
@@ -429,6 +428,11 @@ $(document).ready(function(){
             localStorage.setItem(reload, 0);
         }
         $('input[type="text"][name="reload"]').val(localStorage.getItem("reload-" + environment));
+
+        if (localStorage.getItem(panelTheme) == undefined) {
+            localStorage.setItem(panelTheme, "Theme1");
+        }
+        $('select[name="panelTheme"]').val(localStorage.getItem("panelTheme-" + environment));
 
         if (localStorage.getItem(percent) == undefined) {
             localStorage.setItem(percent, 40);
