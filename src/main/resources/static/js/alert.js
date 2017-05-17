@@ -401,7 +401,7 @@ $(document).ready(function(){
         var panelTheme = 'panelTheme-' + boardName;
 
         if (localStorage.getItem(success) == undefined){
-            localStorage.setItem(success, false);
+            localStorage.setItem(success, true);
         }
         if (localStorage.getItem(building) == undefined){
             localStorage.setItem(building, true);
