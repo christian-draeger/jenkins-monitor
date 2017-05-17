@@ -432,7 +432,7 @@ $(document).ready(function(){
         $('select[name="panelTheme"]').val(localStorage.getItem("panelTheme-" + environment));
 
         if (localStorage.getItem(panelEffect) == undefined) {
-            localStorage.setItem(panelEffect, "flipInX");
+            localStorage.setItem(panelEffect, "fadeIn");
         }
         $('select[name="panelEffect"]').val(localStorage.getItem("panelEffect-" + environment));
 
