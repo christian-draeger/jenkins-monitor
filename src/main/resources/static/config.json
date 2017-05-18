@@ -2,34 +2,29 @@
   "jobs": {
     "jenkinsIo": [
       {
-        "name": "Core/job/jenkins_master",
-        "message": "jenkins master",
-        "sub": "Core"
+        "name": "Plugins/job/publish-to-bitbucket-plugin/job/master",
+        "message": "bitbucket plugin",
+        "sub": "master"
       },
       {
-        "name": "Core/job/jenkins_lts",
-        "message": "jenkins LTS",
-        "sub": "Core"
+        "name": "Plugins/job/gradle-plugin/job/master",
+        "message": "gradle plugin",
+        "sub": "master"
       },
       {
-        "name": "Core/job/jenkins_2.0",
-        "message": "jenkins 2.0",
-        "sub": "Core"
+        "name": "Plugins/job/viber-notification-plugin/job/master",
+        "message": "viber plugin",
+        "sub": "master"
       },
       {
-        "name": "Infrastructure/job/jenkins-infra/branch/staging",
-        "message": "verify branch (staging)",
-        "sub": "Infra"
+        "name": "Plugins/job/nunit-plugin/job/master",
+        "message": "nUnit plugin",
+        "sub": "master"
       },
       {
-        "name": "Infrastructure/job/jenkins-infra/branch/production",
-        "message": "verify branch (production)",
-        "sub": "Infra"
-      },
-      {
-        "name": "Reporting/job/backend-plugin-report-card",
-        "message": "report card",
-        "sub": "backend plugin"
+        "name": "Plugins/job/m2release-plugin/job/master",
+        "message": "m2 release plugin",
+        "sub": "master"
       },
       {
         "h1": "Jenkins.io example Board<br><span style='font-size:35px;color:#555'>(monitoring jobs of the jenkins project)</span>",
@@ -37,17 +32,15 @@
       }
     ]
   },
-  "webServiceAdress": "localhost:8282",
-  "webServiceAdress1": "172.29.12.195:8282",
-  "webServiceAdress2": "172.29.0.106:8282",
+  "webServiceAdress": "http://localhost:8282",
   "danger": [
-      {
-        "percentage": 40,
-        "byPercentage": true
-      },
-      {
-        "byJobContainsString": "verify",
-        "containsString": true
-      }
+    {
+      "percentage": 40,
+      "byPercentage": true
+    },
+    {
+      "byJobContainsString": "verify",
+      "containsString": true
+    }
   ]
 }
