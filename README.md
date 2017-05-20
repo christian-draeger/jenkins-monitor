@@ -1,7 +1,7 @@
 configure the board by using
 config.json
 
-"jsonWithReleaseVersionInfo" and "webServiceAdress" need to point to mashine that is to be your server
+"webServiceAdress" needs to point to mashine where application is running
 
 to start the spring-boot application use:
 mvn spring-boot:run
