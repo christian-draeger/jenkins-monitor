@@ -6,7 +6,7 @@
     <packaging>jar</packaging>
 
     <groupId>org.springframework</groupId>
-    <artifactId>jenkins-testing-board</artifactId>
+    <artifactId>jenkins-monitor</artifactId>
     <version>0.3.0</version>
 
     <parent>
@@ -19,6 +19,8 @@
         <java.version>1.7</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+
+        <artifact-name>jenkins-monitor</artifact-name>
     </properties>
 
     <dependencies>
@@ -54,6 +56,49 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
+
+
+            <plugin>
+                <groupId>org.vafer</groupId>
+                <artifactId>jdeb</artifactId>
+                <version>1.5</version>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>jdeb</goal>
+                        </goals>
+                        <configuration>
+                            <deb>${project.build.directory}/jenkins-monitor-${version}.deb</deb>
+                            <verbose>true</verbose>
+                            <controlDir>${project.build.directory}/classes/deb/control</controlDir>
+                            <dataSet>
+                                <data>
+                                    <src>${project.build.directory}/${artifact-name}-${version}.${project.packaging}</src>
+                                    <type>file</type>
+                                    <mapper>
+                                        <type>perm</type>
+                                        <prefix>/usr/share/${artifact-name}</prefix>
+                                        <user>${artifact-name}</user>
+                                        <group>${artifact-name}</group>
+                                    </mapper>
+                                </data>
+                                <data>
+                                    <src>${project.build.directory}/classes/deb/${artifact-name}.conf</src>
+                                    <type>file</type>
+                                    <mapper>
+                                        <type>perm</type>
+                                        <prefix>/usr/share/${artifact-name}</prefix>
+                                        <user>${artifact-name}</user>
+                                        <group>${artifact-name}</group>
+                                    </mapper>
+                                </data>
+                            </dataSet>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
         </plugins>
     </build>
 

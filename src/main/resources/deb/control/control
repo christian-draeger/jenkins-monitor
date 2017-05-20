@@ -1,0 +1,9 @@
+Package: @artifact-name@
+Version: [[version]]
+Section:
+Priority:
+Architecture: all
+Description: @artifact-name@ is here
+Maintainer: christian.draeger1@gmail.com
+Depends:
+Recommends:
