@@ -123,69 +123,103 @@ body {
     color: #ffffff;
     background-color: #222222;
 
-    /*background:
-        radial-gradient(black 15%, transparent 16%) 0 0,
-        radial-gradient(black 15%, transparent 16%) 8px 8px,
-        radial-gradient(rgba(255,255,255,.1) 15%, transparent 20%) 0 1px,
-        radial-gradient(rgba(255,255,255,.1) 15%, transparent 20%) 8px 9px;
-    background-color:#282828;
-    background-size:16px 16px;*/
-
-    /*background:
-        linear-gradient(135deg, #708090 22px, #d9ecff 22px, #d9ecff 24px, transparent 24px, transparent 67px, #d9ecff 67px, #d9ecff 69px, transparent 69px),
-        linear-gradient(225deg, #708090 22px, #d9ecff 22px, #d9ecff 24px, transparent 24px, transparent 67px, #d9ecff 67px, #d9ecff 69px, transparent 69px)0 64px;
-    background-color:#708090;
-    background-size: 64px 128px;*/
-
-   /* background:
-        linear-gradient(27deg, #151515 5px, transparent 5px) 0 5px,
-        linear-gradient(207deg, #151515 5px, transparent 5px) 10px 0px,
-        linear-gradient(27deg, #222 5px, transparent 5px) 0px 10px,
-        linear-gradient(207deg, #222 5px, transparent 5px) 10px 5px,
-        linear-gradient(90deg, #1b1b1b 10px, transparent 10px),
-        linear-gradient(#1d1d1d 25%, #1a1a1a 25%, #1a1a1a 50%, transparent 50%, transparent 75%, #242424 75%, #242424);
-    background-color: #131313;
-    background-size: 20px 20px;*/
-
-    /*background-color:#556;
-    background-image:
-        linear-gradient(30deg, #445 12%, transparent 12.5%, transparent 87%, #445 87.5%, #445),
-        linear-gradient(150deg, #445 12%, transparent 12.5%, transparent 87%, #445 87.5%, #445),
-        linear-gradient(30deg, #445 12%, transparent 12.5%, transparent 87%, #445 87.5%, #445),
-        linear-gradient(150deg, #445 12%, transparent 12.5%, transparent 87%, #445 87.5%, #445),
-        linear-gradient(60deg, #99a 25%, transparent 25.5%, transparent 75%, #99a 75%, #99a),
-        linear-gradient(60deg, #99a 25%, transparent 25.5%, transparent 75%, #99a 75%, #99a);
-    background-size:80px 140px;
-    background-position: 0 0, 0 0, 40px 70px, 40px 70px, 0 0, 40px 70px;*/
-
-    /*background-color: #6d695c;
-    background-image:
-            repeating-linear-gradient(120deg, rgba(255,255,255,.1), rgba(255,255,255,.1) 1px, transparent 1px, transparent 60px),
-            repeating-linear-gradient(60deg, rgba(255,255,255,.1), rgba(255,255,255,.1) 1px, transparent 1px, transparent 60px),
-            linear-gradient(60deg, rgba(0,0,0,.1) 25%, transparent 25%, transparent 75%, rgba(0,0,0,.1) 75%, rgba(0,0,0,.1)),
-            linear-gradient(120deg, rgba(0,0,0,.1) 25%, transparent 25%, transparent 75%, rgba(0,0,0,.1) 75%, rgba(0,0,0,.1));
-    background-size: 70px 120px;*/
-
-    /*background-color:silver;
-    background-image:
-        radial-gradient(circle at 100% 150%, silver 24%, white 25%, white 28%, silver 29%, silver 36%, white 36%, white 40%, transparent 40%, transparent),
-        radial-gradient(circle at 0    150%, silver 24%, white 25%, white 28%, silver 29%, silver 36%, white 36%, white 40%, transparent 40%, transparent),
-        radial-gradient(circle at 50%  100%, white 10%, silver 11%, silver 23%, white 24%, white 30%, silver 31%, silver 43%, white 44%, white 50%, silver 51%, silver 63%, white 64%, white 71%, transparent 71%, transparent),
-        radial-gradient(circle at 100% 50%, white 5%, silver 6%, silver 15%, white 16%, white 20%, silver 21%, silver 30%, white 31%, white 35%, silver 36%, silver 45%, white 46%, white 49%, transparent 50%, transparent),
-        radial-gradient(circle at 0    50%, white 5%, silver 6%, silver 15%, white 16%, white 20%, silver 21%, silver 30%, white 31%, white 35%, silver 36%, silver 45%, white 46%, white 49%, transparent 50%, transparent);
-    background-size:100px 50px;*/
-
-    /*background:
-        linear-gradient(45deg, #dca 12%, transparent 0, transparent 88%, #dca 0),
-        linear-gradient(135deg, transparent 37%, #a85 0, #a85 63%, transparent 0),
-        linear-gradient(45deg, transparent 37%, #dca 0, #dca 63%, transparent 0) #753;
-    background-size: 25px 25px;*/
-
     padding: 6px;
 }
 
+.background-fibre {
+    background:
+           radial-gradient(black 15%, transparent 16%) 0 0,
+           radial-gradient(black 15%, transparent 16%) 8px 8px,
+           radial-gradient(rgba(255,255,255,.1) 15%, transparent 20%) 0 1px,
+           radial-gradient(rgba(255,255,255,.1) 15%, transparent 20%) 8px 9px;
+       background-color:#282828;
+       background-size:16px 16px;
+}
+
+.background-weave {
+    background:
+        linear-gradient(135deg, #151515 22px, #222 22px, #222 24px, transparent 24px, transparent 67px, #222 67px, #222 69px, transparent 69px),
+        linear-gradient(225deg, #151515 22px, #222 22px, #222 24px, transparent 24px, transparent 67px, #222 67px, #222 69px, transparent 69px)0 64px;
+    background-color:#151515;
+    background-size: 64px 128px;
+}
+
+.background-carbon {
+    background:
+            linear-gradient(27deg, #151515 5px, transparent 5px) 0 5px,
+            linear-gradient(207deg, #151515 5px, transparent 5px) 10px 0px,
+            linear-gradient(27deg, #222 5px, transparent 5px) 0px 10px,
+            linear-gradient(207deg, #222 5px, transparent 5px) 10px 5px,
+            linear-gradient(90deg, #1b1b1b 10px, transparent 10px),
+            linear-gradient(#1d1d1d 25%, #1a1a1a 25%, #1a1a1a 50%, transparent 50%, transparent 75%, #242424 75%, #242424);
+    background-color: #131313;
+    background-size: 20px 20px;
+}
+
+.background-cubes {
+    background-color:#111;
+    background-image:
+            linear-gradient(30deg, #000 12%, transparent 12.5%, transparent 87%, #000 87.5%, #000),
+            linear-gradient(150deg, #000 12%, transparent 12.5%, transparent 87%, #000 87.5%, #000),
+            linear-gradient(30deg, #000 12%, transparent 12.5%, transparent 87%, #000 87.5%, #000),
+            linear-gradient(150deg, #000 12%, transparent 12.5%, transparent 87%, #000 87.5%, #000),
+            linear-gradient(60deg, #1a1a1a 25%, transparent 25.5%, transparent 75%, #1a1a1a 75%, #1a1a1a),
+            linear-gradient(60deg, #1a1a1a 25%, transparent 25.5%, transparent 75%, #1a1a1a 75%, #1a1a1a);
+    background-size:80px 140px;
+    background-position: 0 0, 0 0, 40px 70px, 40px 70px, 0 0, 40px 70px;
+}
+
+.background-rhombus {
+    background-color: #111;
+    background-image:
+            repeating-linear-gradient(120deg, #1a1a1a, #1a1a1a 1px, transparent 1px, transparent 60px),
+            repeating-linear-gradient(60deg, #1a1a1a, #1a1a1a 1px, transparent 1px, transparent 60px),
+            linear-gradient(60deg, #000000 25%, transparent 25%, transparent 75%, #000000 75%, #000000),
+            linear-gradient(120deg, #000000 25%, transparent 25%, transparent 75%, #000000 75%, #000000);
+    background-size: 70px 120px;
+}
+
+.background-seigaiha {
+    background-color: #000000;
+    background-image:
+            radial-gradient(circle at 100% 150%, #000000 24%, #111111 25%, #111111 28%, #000000 29%, #000000 36%, #111111 36%, #111111 40%, transparent 40%, transparent),
+            radial-gradient(circle at 0    150%, #000000 24%, #111111 25%, #111111 28%, #000000 29%, #000000 36%, #111111 36%, #111111 40%, transparent 40%, transparent),
+            radial-gradient(circle at 50%  100%, #111111 10%, #000000 11%, #000000 23%, #111111 24%, #111111 30%, #000000 31%, #000000 43%, #111111 44%, #111111 50%, #000000 51%, #000000 63%, #111111 64%, #111111 71%, transparent 71%, transparent),
+            radial-gradient(circle at 100% 50%, #111111 5%, #000000 6%, #000000 15%, #111111 16%, #111111 20%, #000000 21%, #000000 30%, #111111 31%, #111111 35%, #000000 36%, #000000 45%, #111111 46%, #111111 49%, transparent 50%, transparent),
+            radial-gradient(circle at 0    50%, #111111 5%, #000000 6%, #000000 15%, #111111 16%, #111111 20%, #000000 21%, #000000 30%, #111111 31%, #111111 35%, #000000 36%, #000000 45%, #111111 46%, #111111 49%, transparent 50%, transparent);
+    background-size:100px 50px;
+}
+
+
+.background-willow {
+    background:
+            linear-gradient(45deg, #111111 12%, transparent 0, transparent 88%, #111111 0),
+            linear-gradient(135deg, transparent 37%, #0a0a0a 0, #0a0a0a 63%, transparent 0),
+            linear-gradient(45deg, transparent 37%, #111111 0, #111111 63%, transparent 0) #000000;
+    background-size: 25px 25px;
+}
+
+.background-chalkboard {
+    background-image: url(../pics/chalkboard.jpg);
+    width: 600px;
+}
+
+.background-wood {
+    background-image: url(../pics/dark-wood.jpg);
+}
+
+.background-fancy-pants {
+    background-image: url(../pics/fancy-pants.jpg);
+    width: 760px;
+}
+
+.background-ocean {
+    background-image: url(../pics/ocean.jpg);
+    width: 600px;
+}
+
 input[type="text"] {
-    width: 8%;
+    width: 10%;
     color: #ffffff;
     background-color: #303030;
     border: 2px solid;
@@ -277,6 +311,12 @@ span[class^="alert-badge-"] {
 
 span[class^="alert-badge-"] > img {
     vertical-align: text-bottom;
+}
+
+.vertical {
+    border: 2px solid;
+    margin-right: 10px;
+    margin-left: 10px;
 }
 
 span.alert-badge-warning {
@@ -377,7 +417,7 @@ div#alerts :nth-child(odd) .alert-dashboard-two-cols {
     margin-left: 2.5%;
 }
 
-.successTheme1 {
+.success-plain {
     background-color: #00bc8c;
     border-color: #00bc8c;
     color: #ffffff;
@@ -385,7 +425,7 @@ div#alerts :nth-child(odd) .alert-dashboard-two-cols {
     padding-right: 25px;
 }
 
-.buildingTheme1 {
+.building-plain {
     background-color: #666666;
     border-color: #666666;
     color: #ffffff;
@@ -393,7 +433,7 @@ div#alerts :nth-child(odd) .alert-dashboard-two-cols {
     padding-right: 25px;
 }
 
-.abortTheme1 {
+.abort-plain {
     background-color: #a6a6a6;
     border-color: #a6a6a6;
     color: #ffffff;
@@ -401,7 +441,7 @@ div#alerts :nth-child(odd) .alert-dashboard-two-cols {
     padding-right: 25px;
 }
 
-.infoTheme1 {
+.info-plain {
     background-color: #3498db;
     border-color: #3498db;
     color: #ffffff;
@@ -409,7 +449,7 @@ div#alerts :nth-child(odd) .alert-dashboard-two-cols {
     padding-right: 25px;
 }
 
-.warningTheme1 {
+.warning-plain {
     background-color: #f39c12;
     border-color: #f39c12;
     color: #ffffff;
@@ -417,7 +457,7 @@ div#alerts :nth-child(odd) .alert-dashboard-two-cols {
     padding-right: 25px;
 }
 
-.dangerTheme1 {
+.danger-plain {
     background-color: #e74c3c;
     border-color: #e74c3c;
     color: #ffffff;
@@ -425,7 +465,7 @@ div#alerts :nth-child(odd) .alert-dashboard-two-cols {
     padding-right: 25px;
 }
 
-.successTheme2 {
+.success-modern-stripes {
     background: repeating-linear-gradient(
             45deg,
             #00bc8c,
@@ -439,7 +479,7 @@ div#alerts :nth-child(odd) .alert-dashboard-two-cols {
     padding-right: 25px;
 }
 
-.buildingTheme2 {
+.building-modern-stripes {
     background: repeating-linear-gradient(
             90deg,
             #666666,
@@ -453,7 +493,7 @@ div#alerts :nth-child(odd) .alert-dashboard-two-cols {
     padding-right: 25px;
 }
 
-.abortTheme2 {
+.abort-modern-stripes {
     background: repeating-linear-gradient(
             90deg,
             #a6a6a6,
@@ -467,7 +507,7 @@ div#alerts :nth-child(odd) .alert-dashboard-two-cols {
     padding-right: 25px;
 }
 
-.infoTheme2 {
+.info-modern-stripes {
     background: repeating-linear-gradient(
             90deg,
             #3498db,
@@ -481,7 +521,7 @@ div#alerts :nth-child(odd) .alert-dashboard-two-cols {
     padding-right: 25px;
 }
 
-.warningTheme2 {
+.warning-modern-stripes {
     background: repeating-linear-gradient(
             -45deg,
             #f39c12,
@@ -495,7 +535,7 @@ div#alerts :nth-child(odd) .alert-dashboard-two-cols {
     padding-right: 25px;
 }
 
-.dangerTheme2 {
+.danger-modern-stripes {
     background: repeating-linear-gradient(
             -45deg,
             #e74c3c,
@@ -509,7 +549,7 @@ div#alerts :nth-child(odd) .alert-dashboard-two-cols {
     padding-right: 25px;
 }
 
-.successTheme3 {
+.success-classic-stripes {
     background: repeating-linear-gradient(
             45deg,
             #00bc8c,
@@ -523,7 +563,7 @@ div#alerts :nth-child(odd) .alert-dashboard-two-cols {
     padding-right: 25px;
 }
 
-.buildingTheme3 {
+.building-classic-stripes {
     background: repeating-linear-gradient(
             90deg,
             #666666,
@@ -537,7 +577,7 @@ div#alerts :nth-child(odd) .alert-dashboard-two-cols {
     padding-right: 25px;
 }
 
-.abortTheme3 {
+.abort-classic-stripes {
     background: repeating-linear-gradient(
             90deg,
             #a6a6a6,
@@ -551,7 +591,7 @@ div#alerts :nth-child(odd) .alert-dashboard-two-cols {
     padding-right: 25px;
 }
 
-.infoTheme3 {
+.info-classic-stripes {
     background: repeating-linear-gradient(
             90deg,
             #3498db,
@@ -565,7 +605,7 @@ div#alerts :nth-child(odd) .alert-dashboard-two-cols {
     padding-right: 25px;
 }
 
-.warningTheme3 {
+.warning-classic-stripes {
     background: repeating-linear-gradient(
             -45deg,
             #f39c12,
@@ -579,7 +619,7 @@ div#alerts :nth-child(odd) .alert-dashboard-two-cols {
     padding-right: 25px;
 }
 
-.dangerTheme3 {
+.danger-classic-stripes {
     background: repeating-linear-gradient(
             -45deg,
             #e74c3c,
@@ -593,7 +633,7 @@ div#alerts :nth-child(odd) .alert-dashboard-two-cols {
     padding-right: 25px;
 }
 
-.successTheme4 {
+.success-arrows {
     background:
         linear-gradient(45deg, #00bc8c 45px, transparent 45px) 64px 64px,
         linear-gradient(45deg, #00bc8c 45px, transparent 45px, transparent 91px, #00ac81 91px, #00ac81 135px, transparent 135px),
@@ -606,7 +646,7 @@ div#alerts :nth-child(odd) .alert-dashboard-two-cols {
     padding-right: 25px;
 }
 
-.buildingTheme4 {
+.building-arrows {
     background:
         linear-gradient(45deg, #606060 45px, transparent 45px) 64px 64px,
         linear-gradient(45deg, #606060 45px, transparent 45px, transparent 91px, #666666 91px, #666666 135px, transparent 135px),
@@ -619,7 +659,7 @@ div#alerts :nth-child(odd) .alert-dashboard-two-cols {
     padding-right: 25px;
 }
 
-.abortTheme4 {
+.abort-arrows {
     background:
         linear-gradient(45deg, #979797 45px, transparent 45px) 64px 64px,
         linear-gradient(45deg, #979797 45px, transparent 45px, transparent 91px, #a6a6a6 91px, #a6a6a6 135px, transparent 135px),
@@ -632,7 +672,7 @@ div#alerts :nth-child(odd) .alert-dashboard-two-cols {
     padding-right: 25px;
 }
 
-.infoTheme4 {
+.info-arrows {
     background:
         linear-gradient(45deg, #338abf 45px, transparent 45px) 64px 64px,
         linear-gradient(45deg, #338abf 45px, transparent 45px, transparent 91px, #3498db 91px, #3498db 135px, transparent 135px),
@@ -645,7 +685,7 @@ div#alerts :nth-child(odd) .alert-dashboard-two-cols {
     padding-right: 25px;
 }
 
-.warningTheme4 {
+.warning-arrows {
     background:
         linear-gradient(45deg, #e69012 45px, transparent 45px) 64px 64px,
         linear-gradient(45deg, #e69012 45px, transparent 45px, transparent 91px, #f39c12 91px, #f39c12 135px, transparent 135px),
@@ -658,7 +698,7 @@ div#alerts :nth-child(odd) .alert-dashboard-two-cols {
     padding-right: 25px;
 }
 
-.dangerTheme4 {
+.danger-arrows {
     background:
         linear-gradient(45deg, #d04637 45px, transparent 45px) 64px 64px,
         linear-gradient(45deg, #d04637 45px, transparent 45px, transparent 91px, #e74c3c 91px, #e74c3c 135px, transparent 135px),
@@ -671,7 +711,7 @@ div#alerts :nth-child(odd) .alert-dashboard-two-cols {
     padding-right: 25px;
 }
 
-.successTheme5 {
+.success-rhombus {
     background-color: #00bc8c;
     background-image:
             repeating-linear-gradient(120deg, #007c5d, #007c5d 1px, transparent 1px, transparent 60px),
@@ -685,7 +725,7 @@ div#alerts :nth-child(odd) .alert-dashboard-two-cols {
     padding-right: 25px;
 }
 
-.buildingTheme5 {
+.building-rhombus {
     background-color: #666666;
     background-image:
             repeating-linear-gradient(120deg, #373737, #373737 1px, transparent 1px, transparent 60px),
@@ -699,7 +739,7 @@ div#alerts :nth-child(odd) .alert-dashboard-two-cols {
     padding-right: 25px;
 }
 
-.abortTheme5 {
+.abort-rhombus {
     background-color: #a6a6a6;
     background-image:
             repeating-linear-gradient(120deg, #656565, #656565 1px, transparent 1px, transparent 60px),
@@ -713,7 +753,7 @@ div#alerts :nth-child(odd) .alert-dashboard-two-cols {
     padding-right: 25px;
 }
 
-.infoTheme5 {
+.info-rhombus {
     background-color: #3498db;
     background-image:
             repeating-linear-gradient(120deg, #206c93, #206c93 1px, transparent 1px, transparent 60px),
@@ -727,7 +767,7 @@ div#alerts :nth-child(odd) .alert-dashboard-two-cols {
     padding-right: 25px;
 }
 
-.warningTheme5 {
+.warning-rhombus {
     background-color: #f39c12;
     background-image:
             repeating-linear-gradient(120deg, #b86712, #b86712 1px, transparent 1px, transparent 60px),
@@ -741,7 +781,7 @@ div#alerts :nth-child(odd) .alert-dashboard-two-cols {
     padding-right: 25px;
 }
 
-.dangerTheme5 {
+.danger-rhombus {
     background-color: #e74c3c;
     background-image:
             repeating-linear-gradient(120deg, #9b3d2e, #9b3d2e 1px, transparent 1px, transparent 60px),
@@ -755,7 +795,7 @@ div#alerts :nth-child(odd) .alert-dashboard-two-cols {
     padding-right: 25px;
 }
 
-.successTheme6 {
+.success-cubes {
     background-color: #00ab84;
     background-image:
         linear-gradient(30deg, #00a383 12%, transparent 12.5%, transparent 87%, #00a383 87.5%, #00a383),
@@ -772,7 +812,7 @@ div#alerts :nth-child(odd) .alert-dashboard-two-cols {
     padding-right: 25px;
 }
 
-.buildingTheme6 {
+.building-cubes {
     background-color: #606060;
     background-image:
             linear-gradient(30deg, #555555 12%, transparent 12.5%, transparent 87%, #555555 87.5%, #555555),
@@ -789,7 +829,7 @@ div#alerts :nth-child(odd) .alert-dashboard-two-cols {
     padding-right: 25px;
 }
 
-.abortTheme6 {
+.abort-cubes {
     background-color: #a6a6a6;
     background-image:
             linear-gradient(30deg, #9d9d9d 12%, transparent 12.5%, transparent 87%, #9d9d9d 87.5%, #9d9d9d),
@@ -806,7 +846,7 @@ div#alerts :nth-child(odd) .alert-dashboard-two-cols {
     padding-right: 25px;
 }
 
-.infoTheme6 {
+.info-cubes {
     background-color: #3491d2;
     background-image:
             linear-gradient(30deg, #2087b0 12%, transparent 12.5%, transparent 87%, #2087b0 87.5%, #2087b0),
@@ -823,7 +863,7 @@ div#alerts :nth-child(odd) .alert-dashboard-two-cols {
     padding-right: 25px;
 }
 
-.warningTheme6 {
+.warning-cubes {
     background-color: #ea9212;
     background-image:
             linear-gradient(30deg, #e38812 12%, transparent 12.5%, transparent 87%, #e38812 87.5%, #e38812),
@@ -840,7 +880,7 @@ div#alerts :nth-child(odd) .alert-dashboard-two-cols {
     padding-right: 25px;
 }
 
-.dangerTheme6 {
+.danger-cubes {
     background-color: #dc4534;
     background-image:
             linear-gradient(30deg, #d04433 12%, transparent 12.5%, transparent 87%, #d04433 87.5%, #d04433),
@@ -857,7 +897,7 @@ div#alerts :nth-child(odd) .alert-dashboard-two-cols {
     padding-right: 25px;
 }
 
-.successTheme7 {
+.success-squares {
     background-color: #00bc8c;
     background-image: linear-gradient(45deg, #00af86 25%, transparent 25%, transparent 75%, #00af86 75%, #00af86),
     linear-gradient(45deg, #00af86 25%, transparent 25%, transparent 75%, #00af86 75%, #00af86);
@@ -869,7 +909,7 @@ div#alerts :nth-child(odd) .alert-dashboard-two-cols {
     padding-right: 25px;
 }
 
-.buildingTheme7 {
+.building-squares {
     background-color: #666666;
     background-image: linear-gradient(45deg, #555555 25%, transparent 25%, transparent 75%, #555555 75%, #555555),
     linear-gradient(45deg, #555555 25%, transparent 25%, transparent 75%, #555555 75%, #555555);
@@ -881,7 +921,7 @@ div#alerts :nth-child(odd) .alert-dashboard-two-cols {
     padding-right: 25px;
 }
 
-.abortTheme7 {
+.abort-squares {
     background-color: #a6a6a6;
     background-image: linear-gradient(45deg, #9d9d9d 25%, transparent 25%, transparent 75%, #9d9d9d 75%, #9d9d9d),
     linear-gradient(45deg, #9d9d9d 25%, transparent 25%, transparent 75%, #9d9d9d 75%, #9d9d9d);
@@ -893,7 +933,7 @@ div#alerts :nth-child(odd) .alert-dashboard-two-cols {
     padding-right: 25px;
 }
 
-.infoTheme7 {
+.info-squares {
     background-color: #3491d2;
     background-image: linear-gradient(45deg, #2087b0 25%, transparent 25%, transparent 75%, #2087b0 75%, #2087b0),
     linear-gradient(45deg, #2087b0 25%, transparent 25%, transparent 75%, #2087b0 75%, #2087b0);
@@ -905,7 +945,7 @@ div#alerts :nth-child(odd) .alert-dashboard-two-cols {
     padding-right: 25px;
 }
 
-.warningTheme7 {
+.warning-squares {
     background-color: #f39c12;
     background-image:
         linear-gradient(45deg, #e38812 25%, transparent 25%, transparent 75%, #e38812 75%, #e38812),
@@ -917,7 +957,7 @@ div#alerts :nth-child(odd) .alert-dashboard-two-cols {
     padding-right: 25px;
 }
 
-.dangerTheme7 {
+.danger-squares {
     background-color: #e74c3c;
     background-image:
             linear-gradient(45deg, #d04433 25%, transparent 25%, transparent 75%, #d04433 75%, #d04433),
@@ -1245,7 +1285,7 @@ button.close {
 
 .modal.in .modal-dialog,
 .modal.fade .modal-dialog {
-    width: 50%;
+    width: 80%;
 }
 
 .modal-open .modal {
@@ -1298,7 +1338,7 @@ button.close {
     padding: 20px;
     border-bottom: 1px solid #464545;
     min-height: 16.42857143px;
-    font-size: 40px;
+    font-size: 0.5em;
 }
 
 .modal-header .close {
@@ -1315,8 +1355,9 @@ button.close {
 .modal-body {
     position: relative;
     padding: 20px;
-    font-size: 30px;
+    font-size: 0.4em;
     text-align: left;
+    column-count: 2;
 }
 
 .modal-footer {
@@ -1382,9 +1423,9 @@ select {
 }
 
 select {
-    max-width: 30%;
+    max-width: 35%;
     border: 3px solid #808080;
-    padding: 10px;
+    padding: 3px;
     background-color: #333;
     color: white;
     text-align-last: center;

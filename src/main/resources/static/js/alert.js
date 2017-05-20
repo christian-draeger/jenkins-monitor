@@ -4,6 +4,7 @@ $(document).ready(function(){
     var buildingJobs = false;
     var abortedJobs = false;
     var theme;
+    var jobCount;
 
     var $configContainer = $('#boardConfig'),
         $configForm = $configContainer.find('.modal-body form'),
@@ -28,15 +29,17 @@ $(document).ready(function(){
         localStorage.setItem("dangerPercentage-" + environment, $('input[type="text"][name="percent"]').val());
         localStorage.setItem("panelTheme-" + environment, $('select[name="panelTheme"] option:selected').val());
         localStorage.setItem("panelEffect-" + environment, $('select[name="panelEffect"] option:selected').val());
+        localStorage.setItem("backgroundTheme-" + environment, $('select[name="background"] option:selected').val());
         config("set");
 
         location.reload();
     });
 
+    useBackgroundTheme(environment);
     columnSwitch(environment);
     checkForDefaultConfigOfBoard(environment);
     getConfigModalHeader(environment);
-    autoRefresh()
+    autoRefresh();
 
 	$.getJSON("config.json", configJson);
 
@@ -82,7 +85,8 @@ $(document).ready(function(){
 			if (location.search === "?" + boardName) {
 				$("#noParam").hide();
 
-				$("#job-count").html("jobCount: " + (getNumberOfJobsForBoard(numberOfBoard) -1));
+				jobCount = getNumberOfJobsForBoard(numberOfBoard) -1;
+				$("#job-count").html("jobCount: " + jobCount);
 
 
 
@@ -314,7 +318,7 @@ $(document).ready(function(){
         if (getResult(data) == "hasNumbers" && localStorage.getItem("showSuccessVsFail-" + environment) == "false"){
             return getFailCount(data) + '<sub>/' + getTotalCount(data) + '</sub>';
         } else if (getResult(data) == "hasNumbers" && localStorage.getItem("showSuccessVsFail-" + environment) == "true"){
-            return getPassCount(data) + '<sup>+</sup>/' + getFailCount(data) + '<sup>-</sup>';
+            return getPassCount(data) + '<sup>+</sup><span class="vertical"></span>' + getFailCount(data) + '<sup>-</sup>';
         } else if (getResult(data) == "success") {
             return '<span class="glyphicon glyphicon-ok"></span>';
         } else if (getResult(data) == "failure") {
@@ -399,6 +403,7 @@ $(document).ready(function(){
         var reload = 'reload-' + boardName;
         var percent = 'dangerPercentage-' + boardName;
         var panelTheme = 'panelTheme-' + boardName;
+        var backgroundTheme = 'backgroundTheme-' + boardName;
 
         if (localStorage.getItem(success) == undefined){
             localStorage.setItem(success, true);
@@ -419,7 +424,11 @@ $(document).ready(function(){
             localStorage.setItem(buildTime, true);
         }
         if (localStorage.getItem(oneCol) == undefined) {
-            localStorage.setItem(oneCol, true);
+            if (jobCount <= 6) {
+                localStorage.setItem(oneCol, true);
+            } else {
+                localStorage.setItem(oneCol, false);
+            }
         }
         if (localStorage.getItem(reload) == undefined) {
             localStorage.setItem(reload, 0);
@@ -427,7 +436,7 @@ $(document).ready(function(){
         $('input[type="text"][name="reload"]').val(localStorage.getItem("reload-" + environment));
 
         if (localStorage.getItem(panelTheme) == undefined) {
-            localStorage.setItem(panelTheme, "Theme1");
+            localStorage.setItem(panelTheme, "-plain");
         }
         $('select[name="panelTheme"]').val(localStorage.getItem("panelTheme-" + environment));
 
@@ -440,6 +449,12 @@ $(document).ready(function(){
             localStorage.setItem(percent, 40);
         }
         $('input[type="text"][name="percent"]').val(localStorage.getItem("dangerPercentage-" + environment));
+
+        if (localStorage.getItem(backgroundTheme) == undefined) {
+            localStorage.setItem(backgroundTheme, "background-fibre");
+        }
+        $('select[name="background"]').val(localStorage.getItem("backgroundTheme-" + environment));
+
     }
 
     function autoRefresh(){
@@ -457,6 +472,11 @@ $(document).ready(function(){
         var effect = localStorage.getItem('panelEffect-' + boardName);
         effect = effect + " animated ";
         return effect;
+    }
+
+    function useBackgroundTheme(boardName) {
+        var backgroundTheme = localStorage.getItem('backgroundTheme-' + boardName);
+        $('body.dashboard').addClass(backgroundTheme);
     }
 
     /********************************* end configuration *********************************/
