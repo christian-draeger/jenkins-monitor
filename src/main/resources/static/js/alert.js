@@ -79,40 +79,43 @@ $(document).ready(function(){
         var boardName;
 
         // stick all together
-		for (var numberOfBoard = 0; numberOfBoard < boards.length; numberOfBoard++){
-            boardName = getBoardName(numberOfBoard);
+        if (boards.length === 0) {
+            $('h1').hide();
+            $('#noParam').html("no board configurations found<br> create a board by clicking on the config symbol at the bottom left corner");
+        } else {
+            for (var numberOfBoard = 0; numberOfBoard < boards.length; numberOfBoard++){
+                boardName = getBoardName(numberOfBoard);
 
-			if (location.search === "?" + boardName) {
-				$("#noParam").hide();
+                if (location.search === "?" + boardName) {
+                    $("#noParam").hide();
 
-				jobCount = getNumberOfJobsForBoard(numberOfBoard) -1;
-				$("#job-count").html("jobCount: " + jobCount);
-
-
-
-				var boardInfoPosition = config.jobs[boardName].length - 1;
-				var jenkinsUrl = config.jobs[boardName][boardInfoPosition].jenkinsUrl;
-                theme = localStorage.getItem("panelTheme-" + environment);
-                getTestResults(numberOfBoard, jenkinsUrl, boardName);
-
-                getHeadlineOfBoard(config, boardName);
+                    jobCount = getNumberOfJobsForBoard(numberOfBoard) -1;
+                    $("#job-count").html("jobCount: " + jobCount);
 
 
+
+                    var boardInfoPosition = config.jobs[boardName].length - 1;
+                    var jenkinsUrl = config.jobs[boardName][boardInfoPosition].jenkinsUrl;
+                    theme = localStorage.getItem("panelTheme-" + environment);
+                    getTestResults(numberOfBoard, jenkinsUrl, boardName);
+
+                    getHeadlineOfBoard(config, boardName);
+
+
+                }
+
+                else if(!Object.keys(config.jobs).includes(environment)){
+
+                    $('#noParam').html("you need to select a board:<br>");
+
+                    for (var i = 0; i < boards.length; i++) {
+                        $('#noParam').append("<a href='" + document.URL + "?" + getBoardName(i) + "'>" + getBoardName(i) + "</a><br>");
+                    }
+                    $('.config-info').hide();
+                    $('h1').hide();
+                }
             }
-
-			else if(environment === ""){
-				$('#noParam').html("you need to select a board:<br>");
-
-				for (var i = 0; i < boards.length; i++) {
-                    $('#noParam').append("<a href='" + document.URL + "?" + getBoardName(i) + "'>" + getBoardName(i) + "</a><br>");
-				}
-                $('.config-info').hide();
-                $('h1').hide();
-			}
-		}
-
-
-
+        }
 
 		function getJobResult(jobName, message, sub, boardName, jenkinsUrl){
 		    var webserviceAdress = window.location.protocol + "//" + window.location.host;
@@ -135,7 +138,6 @@ $(document).ready(function(){
                     } else {
                         getAlertPanelTemplate(jenkinsData, "warning", message, sub, jobName, jenkinsUrl, boardName);
                     }
-
                     failingJobs = true;
                 }
 
@@ -155,11 +157,11 @@ $(document).ready(function(){
             });
         }
 
-		function isDanger(jobName, jenkinsData){
+		function isDanger(jenkinsData){
 			var danger = false;
-			if (config.danger[1].containsString == true && jobName.indexOf(config.danger[1].byJobContainsString) > -1) {
-				danger = true;
-			} else if (config.danger[0].byPercentage == true && getFailCount(jenkinsData) >= getPercentage(localStorage.getItem("dangerPercentage-" + environment), jenkinsData)) {
+			var percentageConfig = localStorage.getItem("dangerPercentage-" + environment);
+
+			if (getFailCount(jenkinsData) > getPercentage(percentageConfig, jenkinsData)) {
 				danger = true;
 			} else if (getTotalCount(jenkinsData) == 0) {
 				danger = true;
@@ -208,18 +210,6 @@ $(document).ready(function(){
     }
 
     /********************************* end config modal *********************************/
-
-
-
-
-
-	function getPercentage(percent, data){
-		var per = (percent / 100) * getTotalCount(data);
-		return per;
-	}
-
-
-
 
     /********************************* start alert template *********************************/
 
@@ -285,6 +275,11 @@ $(document).ready(function(){
             return getTotalCount(data)
         }
         return 0;
+    }
+
+    function getPercentage(percent, data){
+        var per = (percent / 100) * getTotalCount(data);
+        return per;
     }
 
     function getBuildTime(data) {
@@ -455,7 +450,6 @@ $(document).ready(function(){
             localStorage.setItem(backgroundTheme, "background-fibre");
         }
         $('select[name="background"]').val(localStorage.getItem("backgroundTheme-" + environment));
-
     }
 
     function autoRefresh(){
