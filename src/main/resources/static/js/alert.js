@@ -115,7 +115,8 @@ $(document).ready(function(){
 
 
 		function getJobResult(jobName, message, sub, boardName, jenkinsUrl){
-			var commonPath = config.webServiceAdress + "/jenkins?jenkinsUrl=" + jenkinsUrl + "&job=";
+		    var webserviceAdress = window.location.protocol + "//" + window.location.host;
+			var commonPath = webserviceAdress + "/jenkins?jenkinsUrl=" + jenkinsUrl + "&job=";
             var url = commonPath + jobName;
 
             $.getJSON(url, function(jenkinsData) {
