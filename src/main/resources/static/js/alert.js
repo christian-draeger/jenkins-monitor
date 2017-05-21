@@ -447,7 +447,7 @@ $(document).ready(function(){
         $('input[type="text"][name="percent"]').val(localStorage.getItem("dangerPercentage-" + environment));
 
         if (localStorage.getItem(backgroundTheme) == undefined) {
-            localStorage.setItem(backgroundTheme, "background-fibre");
+            localStorage.setItem(backgroundTheme, "background-chalkboard");
         }
         $('select[name="background"]').val(localStorage.getItem("backgroundTheme-" + environment));
     }
