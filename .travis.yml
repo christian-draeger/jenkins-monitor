@@ -3,7 +3,6 @@ before_install:
   - sudo apt-get install -y lib32z1
   - sudo apt-get install -y lib32ncurses5
   - sudo apt-get install -y lib32bz2-1.0
-  - sudo apt-get install -y zlib.i686
   - sudo apt-get install -y ncurses-libs.i686
   - sudo apt-get install -y bzip2-libs.i686
 language: java
