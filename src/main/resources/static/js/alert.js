@@ -90,7 +90,7 @@ $(document).ready(function(){
 
                     jobCount = getNumberOfJobsForBoard(numberOfBoard) -1;
                     $("#job-count").html("jobCount: " + jobCount);
-                    
+
                     var boardInfoPosition = config.jobs[boardName].length - 1;
                     var jenkinsUrl = config.jobs[boardName][boardInfoPosition].jenkinsUrl;
                     theme = localStorage.getItem("panelTheme-" + environment);

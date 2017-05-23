@@ -1210,6 +1210,10 @@ button span.glyphicon.glyphicon-ok {
     content: "\e023";
 }
 
+.glyphicon-dashboard:before {
+    content: "\e141";
+}
+
 /* modal */
 .glyphicon-info-sign:before {
     content: "\e086";
