@@ -124,16 +124,23 @@ $(document).ready(function(){
 
             $.getJSON(url, function(jenkinsData) {
 
-                if (((getFailCount(jenkinsData) == 0 && getTotalCount(jenkinsData) != 0) || getResult(jenkinsData) == "success") && localStorage.getItem("showSuccessfulJobs-" + boardName) === "true"){
+                var failCount = getFailCount(jenkinsData);
+                var totalCount = getTotalCount(jenkinsData);
+                var resultStatus = getResult(jenkinsData);
+                var showSuccessful = localStorage.getItem("showSuccessfulJobs-" + boardName);
+                var showBuilding = localStorage.getItem("showBuildingJobs-" + boardName);
+                var showAborted = localStorage.getItem("showAbortedJobs-" + boardName);
+
+                if (((failCount === 0 && totalCount !== 0) || resultStatus === "success") && showSuccessful === "true"){
                     getAlertPanelTemplate(jenkinsData, "success", message, sub, jobName, jenkinsUrl, boardName);
                 }
 
-                else if ((getFailCount(jenkinsData) == 0 && getResult(jenkinsData) == "success") && localStorage.getItem("showSuccessfulJobs-" + boardName) === "false"){
+                else if ((failCount === 0 && resultStatus === "success") && showSuccessful === "false"){
                     showNoFailingTests();
                 }
 
-                else if (getFailCount(jenkinsData) > 0 || (getResult(jenkinsData) == "failure")) {
-                    if (isDanger(jobName, jenkinsData)) {
+                else if (failCount >= 0 || (resultStatus === "failure")) {
+                    if (isDanger(jenkinsData)) {
                         getAlertPanelTemplate(jenkinsData, "danger", message, sub, jobName, jenkinsUrl, boardName);
                     } else {
                         getAlertPanelTemplate(jenkinsData, "warning", message, sub, jobName, jenkinsUrl, boardName);
@@ -141,35 +148,36 @@ $(document).ready(function(){
                     failingJobs = true;
                 }
 
-                else if (getResult(jenkinsData) == "building" && localStorage.getItem('showBuildingJobs-' + boardName) == "true") {
+                else if (resultStatus === "building" && showBuilding === "true") {
                     getAlertPanelTemplate(jenkinsData, "building", message, sub, jobName, jenkinsUrl, boardName);
                     buildingJobs = true;
                 }
 
-                else if (getResult(jenkinsData) == "abort" && localStorage.getItem('showAbortedJobs-' + boardName) == "true") {
+                else if (resultStatus === "abort" && showAborted === "true") {
                     getAlertPanelTemplate(jenkinsData, "abort", message, sub, jobName, jenkinsUrl, boardName);
                     abortedJobs = true;
                 }
 
-                else if (getResult(jenkinsData) == "error") {
+                else if (resultStatus === "error") {
                     getAlertPanelTemplate(jenkinsData, "info", message, " job n/a", jobName, jenkinsUrl, boardName);
                 }
             });
         }
 
 		function isDanger(jenkinsData){
+
 			var danger = false;
 			var percentageConfig = localStorage.getItem("dangerPercentage-" + environment);
 
 			if (getFailCount(jenkinsData) > getPercentage(percentageConfig, jenkinsData)) {
 				danger = true;
-			} else if (getTotalCount(jenkinsData) == 0) {
+			} else if (getTotalCount(jenkinsData) === 0) {
 				danger = true;
-			} else if (getResult(jenkinsData) == "failure") {
+			} else if (getResult(jenkinsData) === "failure") {
 				danger = true;
-			} else if (getResult(jenkinsData) == "building") {
+			} else if (getResult(jenkinsData) === "building") {
                 danger = true;
-            } else if (getResult(jenkinsData) == "abort") {
+            } else if (getResult(jenkinsData) === "abort") {
                 danger = true;
             }
 			return danger;
