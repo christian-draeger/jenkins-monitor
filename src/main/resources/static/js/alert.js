@@ -43,7 +43,6 @@ $(document).ready(function(){
 
 	$.getJSON("config.json", configJson);
 
-        
     function configJson(config) {
 
 		function getBoardNames(){
@@ -91,21 +90,18 @@ $(document).ready(function(){
 
                     jobCount = getNumberOfJobsForBoard(numberOfBoard) -1;
                     $("#job-count").html("jobCount: " + jobCount);
-
-
-
+                    
                     var boardInfoPosition = config.jobs[boardName].length - 1;
                     var jenkinsUrl = config.jobs[boardName][boardInfoPosition].jenkinsUrl;
                     theme = localStorage.getItem("panelTheme-" + environment);
                     getTestResults(numberOfBoard, jenkinsUrl, boardName);
-
                     getHeadlineOfBoard(config, boardName);
-
 
                 }
 
                 else if(!Object.keys(config.jobs).includes(environment)){
 
+                    $('#alerts').hide();
                     $('#noParam').html("you need to select a board:<br>");
 
                     for (var i = 0; i < boards.length; i++) {
