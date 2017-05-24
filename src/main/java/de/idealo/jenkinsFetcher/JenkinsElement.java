@@ -15,6 +15,6 @@ import lombok.NoArgsConstructor;
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
 public class JenkinsElement {
     private long failCount, totalCount, passCount, skipCount, timestamp, number;
-    private String fullDisplayName, id, result, url, fullName, description;
+    private String fullDisplayName, id, result, url, fullName, description, date;
     private boolean building;
 }

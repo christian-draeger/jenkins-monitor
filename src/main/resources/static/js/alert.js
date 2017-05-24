@@ -228,13 +228,13 @@ $(document).ready(function(){
 			'<a href="' + jenkinsUrl + '/job/' + jobName + '" target="_blank">' +
 			'<div class="' + alertEffects(boardName)+ alertClass + panelLevel + '" title="' + jobName + '">' +
 			'<span class="alert-badge-' + level + '">' +
-			getResultMarkUp(data) + '</span><b><span>' + message + '</span><sub class="framework-' + level + '"><i>' + sub + '</i></sub></b>' +
+			getResultBadgeMarkUp(data) + '</span><b><span>' + message + '</span><sub class="framework-' + level + '"><i>' + sub + '</i></sub></b>' +
             '<span class="meta-data">' + showBuildTime(data, level, boardName) + showBuildNumber(data, boardName) + '</span></span></div></a>');
 	}
 
     function showBuildTime(data, level, boardName){
         if (localStorage.getItem("showTimestamp-" + boardName) == "true"){
-            return '<span class="framework-' + level + ' glyphicon glyphicon-time"><span class="last-build">' + getBuildTime(data) + '</span>';
+            return '<span class="framework-' + level + ' glyphicon glyphicon-time"><span class="last-build">' + data.date + '</span>';
         }
         return "";
     }
@@ -286,48 +286,39 @@ $(document).ready(function(){
         return per;
     }
 
-    function getBuildTime(data) {
-        var date = new Date(data.timestamp);
-        var day = "0" + date.getDate();
-        var month = "0" + date.getMonth();
-        var year = date.getFullYear();
-        var hours = "0" + date.getHours();
-        var minutes = "0" + date.getMinutes();
-
-        var formattedTime = day.substr(-2) + '.' + month.substr(-2) + '.' + year + ' - ' + hours.substr(-2) + ':' + minutes.substr(-2);
-        return formattedTime;
-    }
-
     function getResult(data){
         if (data.hasOwnProperty("passCount") || data.hasOwnProperty("failCount") || data.hasOwnProperty("skipCount") ||data.hasOwnProperty("totalCount")){
             return "hasNumbers";
-        } else if (data.hasOwnProperty("result") && (data.result == "SUCCESS" || data.result == "STABLE")) {
+        } else if (data.hasOwnProperty("result") && (data.result === "SUCCESS" || data.result === "STABLE")) {
             return "success";
-        } else if (data.hasOwnProperty("result") && data.result == "FAILURE") {
+        } else if (data.hasOwnProperty("result") && data.result === "FAILURE") {
             return "failure";
-        } else if (data.hasOwnProperty("result") && data.result == "ABORTED") {
+        } else if (data.hasOwnProperty("result") && data.result === "ABORTED") {
             return "abort";
         } else if (data.hasOwnProperty("building") && data.building == true) {
             return "building";
-        } else if ((data.hasOwnProperty("error") && data.error == "jenkins not reachable") || Object.keys(data).length <= 1) {
+        } else if ((data.hasOwnProperty("error") && data.error === "jenkins not reachable") || Object.keys(data).length <= 1) {
             return "error";
         }
     }
 
-    function getResultMarkUp(data){
-        if (getResult(data) == "hasNumbers" && localStorage.getItem("showSuccessVsFail-" + environment) == "false"){
+    function getResultBadgeMarkUp(data){
+        var result = getResult(data);
+        var showSuccessVsFail = localStorage.getItem("showSuccessVsFail-" + environment);
+
+        if (result === "hasNumbers" && showSuccessVsFail === "false"){
             return getFailCount(data) + '<sub>/' + getTotalCount(data) + '</sub>';
-        } else if (getResult(data) == "hasNumbers" && localStorage.getItem("showSuccessVsFail-" + environment) == "true"){
+        } else if (result === "hasNumbers" && showSuccessVsFail === "true"){
             return getPassCount(data) + '<sup>+</sup><span class="vertical"></span>' + getFailCount(data) + '<sup>-</sup>';
-        } else if (getResult(data) == "success") {
+        } else if (result === "success") {
             return '<span class="glyphicon glyphicon-ok"></span>';
-        } else if (getResult(data) == "failure") {
+        } else if (result === "failure") {
             return '<span class="glyphicon glyphicon-remove"></span>';
-        } else if (getResult(data) == "building") {
+        } else if (result === "building") {
             return '<img src="/pics/gears.svg" alt="building...">';
-        } else if (getResult(data) == "error") {
+        } else if (result === "error") {
             return '?';
-        } else if (getResult(data) == "abort") {
+        } else if (result === "abort") {
             return 'abort';
         }
     }

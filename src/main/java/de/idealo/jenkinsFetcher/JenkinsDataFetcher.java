@@ -4,6 +4,9 @@ import static com.jayway.restassured.RestAssured.given;
 import static java.lang.System.setProperty;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.TimeZone;
 
 import org.springframework.stereotype.Service;
 
@@ -44,6 +47,8 @@ public class JenkinsDataFetcher {
         jenkinsModel = mapper.readValue(responseLastBuildJsonAsString, JenkinsModel.class);
 
         jenkinsElement.setTimestamp(jenkinsModel.getTimestamp());
+        jenkinsElement.setDate(formatTimestampToDate(jenkinsModel.getTimestamp()));
+
         jenkinsElement.setFullDisplayName(jenkinsModel.getFullDisplayName());
         jenkinsElement.setId(jenkinsModel.getId());
         jenkinsElement.setNumber(jenkinsModel.getNumber());
@@ -77,6 +82,13 @@ public class JenkinsDataFetcher {
             return "{\"error\":\"jenkins not reachable\"}";
         }
         return body;
+    }
+
+    private String formatTimestampToDate(long timestamp) {
+        Date date = new Date(timestamp);
+        SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy - HH:mm:ss");
+        sdf.setTimeZone(TimeZone.getTimeZone("GMT+2")); // give a timezone reference for formating (see comment at the bottom
+        return sdf.format(date);
     }
 
 }
