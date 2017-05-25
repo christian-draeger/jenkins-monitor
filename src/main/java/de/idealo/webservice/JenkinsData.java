@@ -1,19 +1,20 @@
-package de.idealo.jenkinsFetcher;
+package de.idealo.webservice;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 /**
- * Created by christian.draeger on 26.04.16.
+ * Created by christian.draeger on 15.01.16.
  */
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
-@JsonInclude(JsonInclude.Include.NON_EMPTY)
-public class JenkinsElement {
+@AllArgsConstructor
+@JsonIgnoreProperties(ignoreUnknown = true)
+public class JenkinsData {
+
     private long failCount;
     private long totalCount;
     private long passCount;
@@ -26,6 +27,5 @@ public class JenkinsElement {
     private String url;
     private String fullName;
     private String description;
-    private String date;
     private boolean building;
 }

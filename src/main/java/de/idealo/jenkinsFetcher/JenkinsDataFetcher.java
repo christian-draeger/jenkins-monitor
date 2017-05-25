@@ -16,7 +16,7 @@ import com.jayway.restassured.builder.RequestSpecBuilder;
 import com.jayway.restassured.config.SSLConfig;
 import com.jayway.restassured.specification.RequestSpecification;
 
-import de.idealo.webservice.JenkinsModel;
+import de.idealo.webservice.JenkinsData;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -38,31 +38,32 @@ public class JenkinsDataFetcher {
         String jenkinsApiUrlWithoutTestReports = jenkinsUrl + "/job/" + jobName + "/lastBuild/api/json" + jenkinsTreeWithoutTestReport;
 
         JenkinsElement jenkinsElement = new JenkinsElement();
-        JenkinsModel jenkinsModel;
+        JenkinsData jenkinsData;
 
         String responseLastBuildJsonAsString = getResponseAsString(jenkinsApiUrlWithoutTestReports);
         String responseLastBuildTestReportsJsonAsString = getResponseAsString(jenkinsApiUrlWithTestReports);
 
 
-        jenkinsModel = mapper.readValue(responseLastBuildJsonAsString, JenkinsModel.class);
+        jenkinsData = mapper.readValue(responseLastBuildJsonAsString, JenkinsData.class);
 
-        jenkinsElement.setTimestamp(jenkinsModel.getTimestamp());
-        jenkinsElement.setDate(formatTimestampToDate(jenkinsModel.getTimestamp()));
+        jenkinsElement.setTimestamp(jenkinsData.getTimestamp());
+        jenkinsElement.setDate(formatTimestampToDate(jenkinsData.getTimestamp()));
 
-        jenkinsElement.setFullDisplayName(jenkinsModel.getFullDisplayName());
-        jenkinsElement.setId(jenkinsModel.getId());
-        jenkinsElement.setNumber(jenkinsModel.getNumber());
-        jenkinsElement.setResult(jenkinsModel.getResult());
-        jenkinsElement.setUrl(jenkinsModel.getUrl());
-        jenkinsElement.setUrl(jenkinsModel.getDescription());
-        jenkinsElement.setBuilding(jenkinsModel.isBuilding());
+        jenkinsElement.setFullDisplayName(jenkinsData.getFullDisplayName());
+        jenkinsElement.setId(jenkinsData.getId());
+        jenkinsElement.setNumber(jenkinsData.getNumber());
+        jenkinsElement.setResult(jenkinsData.getResult());
+        jenkinsElement.setUrl(jenkinsData.getUrl());
+        jenkinsElement.setUrl(jenkinsData.getDescription());
+        jenkinsElement.setBuilding(jenkinsData.isBuilding());
 
-        jenkinsModel = mapper.readValue(responseLastBuildTestReportsJsonAsString, JenkinsModel.class);
 
-        jenkinsElement.setFailCount(jenkinsModel.getFailCount());
-        jenkinsElement.setTotalCount(jenkinsModel.getTotalCount());
-        jenkinsElement.setPassCount(jenkinsModel.getPassCount());
-        jenkinsElement.setSkipCount(jenkinsModel.getSkipCount());
+        jenkinsData = mapper.readValue(responseLastBuildTestReportsJsonAsString, JenkinsData.class);
+
+        jenkinsElement.setFailCount(jenkinsData.getFailCount());
+        jenkinsElement.setTotalCount(jenkinsData.getTotalCount());
+        jenkinsElement.setPassCount(jenkinsData.getPassCount());
+        jenkinsElement.setSkipCount(jenkinsData.getSkipCount());
 
 
         return jenkinsElement;
@@ -81,13 +82,18 @@ public class JenkinsDataFetcher {
         if (body.contains("HTTP Status 404")) {
             return "{\"error\":\"jenkins not reachable\"}";
         }
+        if (body.contains("<html><")) {
+            return "{}";
+        }
         return body;
     }
+
+
 
     private String formatTimestampToDate(long timestamp) {
         Date date = new Date(timestamp);
         SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy - HH:mm:ss");
-        sdf.setTimeZone(TimeZone.getTimeZone("GMT+2")); // give a timezone reference for formating (see comment at the bottom
+        sdf.setTimeZone(TimeZone.getTimeZone("GMT+2"));
         return sdf.format(date);
     }
 

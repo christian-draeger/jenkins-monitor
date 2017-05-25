@@ -189,7 +189,7 @@ $(document).ready(function(){
         
 
         function getHeadlineOfBoard(config, boardName) {
-            if (localStorage.getItem("showSuccessfulJobs-" + boardName) == "false"){
+            if (localStorage.getItem("showSuccessfulJobs-" + boardName) === "false"){
                 $("h1").append("failing " + config.jobs[boardName][boardInfoPosition].h1);
             } else {
                 $("h1").append(config.jobs[boardName][boardInfoPosition].h1);
@@ -223,7 +223,7 @@ $(document).ready(function(){
 
         var panelLevel = level + theme;
 
-        if (localStorage.getItem("showOneColumn-" + boardName) == "false") alertClass = "alert-dashboard-two-cols ";
+        if (localStorage.getItem("showOneColumn-" + boardName) === "false") alertClass = "alert-dashboard-two-cols ";
 		$("#alerts").append(
 			'<a href="' + jenkinsUrl + '/job/' + jobName + '" target="_blank">' +
 			'<div class="' + alertEffects(boardName)+ alertClass + panelLevel + '" title="' + jobName + '">' +
@@ -233,14 +233,14 @@ $(document).ready(function(){
 	}
 
     function showBuildTime(data, level, boardName){
-        if (localStorage.getItem("showTimestamp-" + boardName) == "true"){
+        if (localStorage.getItem("showTimestamp-" + boardName) === "true"){
             return '<span class="framework-' + level + ' glyphicon glyphicon-time"><span class="last-build">' + data.date + '</span>';
         }
         return "";
     }
 
     function showBuildNumber(data, boardName){
-        if (localStorage.getItem("showBuildNumber-" + boardName) == "true"){
+        if (localStorage.getItem("showBuildNumber-" + boardName) === "true"){
             return '<span class="build-number">#' + data.number + '</span>';
         }
         return "";
