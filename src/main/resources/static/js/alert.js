@@ -1,6 +1,6 @@
-$(document).ready(function(){
+$(document).ready(function () {
 
-	var failingJobs = false;
+    var failingJobs = false;
     var buildingJobs = false;
     var abortedJobs = false;
     var theme;
@@ -12,17 +12,17 @@ $(document).ready(function(){
         environment = location.search.substr(1);
 
 
-
-    function config(mode){
+    function config(mode) {
         $.each($configOptions, function (index, element) {
             var optionName = $(element).attr('name') + "-" + environment;
-            if (mode === "get"){
-                element.checked = localStorage.getItem(optionName) === "false" ? false : true;
-            } else if(mode === "set"){
+            if (mode === "get") {
+                element.checked = localStorage.getItem(optionName) !== "false";
+            } else if (mode === "set") {
                 localStorage.setItem(optionName, element.checked);
             }
         });
     }
+
     config("get");
     $configContainer.find('.modal-footer button').on("click", function () {
         localStorage.setItem("reload-" + environment, $('input[type="text"][name="reload"]').val());
@@ -35,46 +35,50 @@ $(document).ready(function(){
         location.reload();
     });
 
-    useBackgroundTheme(environment);
-    columnSwitch(environment);
-    checkForDefaultConfigOfBoard(environment);
-    getConfigModalHeader(environment);
-    autoRefresh();
-
-	$.getJSON("config.json", configJson);
+    $.getJSON("config.json", configJson);
 
     function configJson(config) {
 
-		function getBoardNames(){
-			var names = [];
-			for (var key in config.jobs){
-				names.push(key);
-			}
-			return names;
-		}
+        useBackgroundTheme(environment);
+        columnSwitch(environment);
 
-		function getBoardName(index){
-			var boards = getBoardNames();
-			return boards[index];
-		}
+        if (Object.keys(config.jobs).includes(environment)) {
+            checkForDefaultConfigOfBoard(environment);
+        }
 
-		function getNumberOfJobsForBoard(numberOfBoard){
-			return config.jobs[getBoardName(numberOfBoard)].length;
-		}
+        getConfigModalHeader(environment);
+        autoRefresh();
 
-		function getJobName(index){
-			return config.jobs[getBoardName(numberOfBoard)][index].name;
-		}
+        function getBoardNames() {
+            var names = [];
+            for (var key in config.jobs) {
+                names.push(key);
+            }
+            return names;
+        }
 
-		function getJobMessage(index){
-			return config.jobs[getBoardName(numberOfBoard)][index].message;
-		}
+        function getBoardName(index) {
+            var boards = getBoardNames();
+            return boards[index];
+        }
 
-		function getJobSub(index){
-			return config.jobs[getBoardName(numberOfBoard)][index].sub;
-		}
+        function getNumberOfJobsForBoard(numberOfBoard) {
+            return config.jobs[getBoardName(numberOfBoard)].length;
+        }
 
-		var boards = getBoardNames();
+        function getJobName(index) {
+            return config.jobs[getBoardName(numberOfBoard)][index].name;
+        }
+
+        function getJobMessage(index) {
+            return config.jobs[getBoardName(numberOfBoard)][index].message;
+        }
+
+        function getJobSub(index) {
+            return config.jobs[getBoardName(numberOfBoard)][index].sub;
+        }
+
+        var boards = getBoardNames();
         var boardName;
 
         // stick all together
@@ -82,13 +86,13 @@ $(document).ready(function(){
             $('h1').hide();
             $('#noParam').html("no board configurations found<br> create a board by clicking on the config symbol at the bottom left corner");
         } else {
-            for (var numberOfBoard = 0; numberOfBoard < boards.length; numberOfBoard++){
+            for (var numberOfBoard = 0; numberOfBoard < boards.length; numberOfBoard++) {
                 boardName = getBoardName(numberOfBoard);
 
                 if (location.search === "?" + boardName) {
                     $("#noParam").hide();
 
-                    jobCount = getNumberOfJobsForBoard(numberOfBoard) -1;
+                    jobCount = getNumberOfJobsForBoard(numberOfBoard) - 1;
                     $("#job-count").html("jobCount: " + jobCount);
 
                     var boardInfoPosition = config.jobs[boardName].length - 1;
@@ -99,7 +103,7 @@ $(document).ready(function(){
 
                 }
 
-                else if(!Object.keys(config.jobs).includes(environment)){
+                else if (!Object.keys(config.jobs).includes(environment)) {
 
                     $('#alerts').hide();
                     $('#noParam').html("you need to select a board:<br>");
@@ -113,12 +117,12 @@ $(document).ready(function(){
             }
         }
 
-		function getJobResult(jobName, message, sub, boardName, jenkinsUrl){
-		    var webserviceAdress = window.location.protocol + "//" + window.location.host;
-			var commonPath = webserviceAdress + "/jenkins?jenkinsUrl=" + jenkinsUrl + "&job=";
+        function getJobResult(jobName, message, sub, boardName, jenkinsUrl) {
+            var webserviceAdress = window.location.protocol + "//" + window.location.host;
+            var commonPath = webserviceAdress + "/jenkins?jenkinsUrl=" + jenkinsUrl + "&job=";
             var url = commonPath + jobName;
 
-            $.getJSON(url, function(jenkinsData) {
+            $.getJSON(url, function (jenkinsData) {
 
                 var failCount = getFailCount(jenkinsData);
                 var totalCount = getTotalCount(jenkinsData);
@@ -127,11 +131,11 @@ $(document).ready(function(){
                 var showBuilding = localStorage.getItem("showBuildingJobs-" + boardName);
                 var showAborted = localStorage.getItem("showAbortedJobs-" + boardName);
 
-                if (((failCount === 0 && totalCount !== 0) || resultStatus === "success") && showSuccessful === "true"){
+                if (((failCount === 0 && totalCount !== 0) || resultStatus === "success") && showSuccessful === "true") {
                     getAlertPanelTemplate(jenkinsData, "success", message, sub, jobName, jenkinsUrl, boardName);
                 }
 
-                else if ((failCount === 0 && resultStatus === "success") && showSuccessful === "false"){
+                else if ((failCount === 0 && resultStatus === "success") && showSuccessful === "false") {
                     showNoFailingTests();
                 }
 
@@ -160,36 +164,35 @@ $(document).ready(function(){
             });
         }
 
-		function isDanger(jenkinsData){
+        function isDanger(jenkinsData) {
 
-			var danger = false;
-			var percentageConfig = localStorage.getItem("dangerPercentage-" + environment);
+            var danger = false;
+            var percentageConfig = localStorage.getItem("dangerPercentage-" + environment);
 
-			if (getFailCount(jenkinsData) > getPercentage(percentageConfig, jenkinsData)) {
-				danger = true;
-			} else if (getTotalCount(jenkinsData) === 0) {
-				danger = true;
-			} else if (getResult(jenkinsData) === "failure") {
-				danger = true;
-			} else if (getResult(jenkinsData) === "building") {
+            if (getFailCount(jenkinsData) > getPercentage(percentageConfig, jenkinsData)) {
+                danger = true;
+            } else if (getTotalCount(jenkinsData) === 0) {
+                danger = true;
+            } else if (getResult(jenkinsData) === "failure") {
+                danger = true;
+            } else if (getResult(jenkinsData) === "building") {
                 danger = true;
             } else if (getResult(jenkinsData) === "abort") {
                 danger = true;
             }
-			return danger;
-		}
+            return danger;
+        }
 
-        function getTestResults(numberOfBoard, jenkinsUrl, boardName){
+        function getTestResults(numberOfBoard, jenkinsUrl, boardName) {
 
             for (var i = 0; i < getNumberOfJobsForBoard(numberOfBoard) - 1; i++) {
                 getJobResult(getJobName(i), getJobMessage(i), getJobSub(i), boardName, jenkinsUrl);
             }
         }
 
-        
 
         function getHeadlineOfBoard(config, boardName) {
-            if (localStorage.getItem("showSuccessfulJobs-" + boardName) === "false"){
+            if (localStorage.getItem("showSuccessfulJobs-" + boardName) === "false") {
                 $("h1").append("failing " + config.jobs[boardName][boardInfoPosition].h1);
             } else {
                 $("h1").append(config.jobs[boardName][boardInfoPosition].h1);
@@ -197,7 +200,7 @@ $(document).ready(function(){
         }
 
 
-	}
+    }
 
     /********************************* start config modal *********************************/
 
@@ -205,11 +208,11 @@ $(document).ready(function(){
         $('#config-modal-header').html(getConfigIconHtmlMarkup() + boardName + '-config' + getCloseXMarkUp());
     }
 
-    function getConfigIconHtmlMarkup(){
+    function getConfigIconHtmlMarkup() {
         return "<span class='glyphicon glyphicon-cog'></span> ";
     }
 
-    function getCloseXMarkUp(){
+    function getCloseXMarkUp() {
         return "<button type='button' class='close' data-dismiss='modal'>&times;</button>";
     }
 
@@ -217,53 +220,59 @@ $(document).ready(function(){
 
     /********************************* start alert template *********************************/
 
-	// level can be "warning", "danger", "success" and "info"
-	function getAlertPanelTemplate(data, level, message, sub, jobName, jenkinsUrl, boardName){
+    // level can be "warning", "danger", "success" and "info"
+    function getAlertPanelTemplate(data, level, message, sub, jobName, jenkinsUrl, boardName) {
         var alertClass = "alert-dashboard ";
 
         var panelLevel = level + theme;
 
         if (localStorage.getItem("showOneColumn-" + boardName) === "false") alertClass = "alert-dashboard-two-cols ";
-		$("#alerts").append(
-			'<a href="' + jenkinsUrl + '/job/' + jobName + '" target="_blank">' +
-			'<div class="' + alertEffects(boardName)+ alertClass + panelLevel + '" title="' + jobName + '">' +
-			'<span class="alert-badge-' + level + '">' +
-			getResultBadgeMarkUp(data) + '</span><b><span>' + message + '</span><sub class="framework-' + level + '"><i>' + sub + '</i></sub></b>' +
+        $("#alerts").append(
+            '<a href="' + jenkinsUrl + '/job/' + jobName + '" target="_blank">' +
+            '<div class="' + alertEffects(boardName) + alertClass + panelLevel + '" title="' + jobName + '">' +
+            showResultBadge(data, level, boardName) + '<b><span>' + message + '</span><sub class="framework-' + level + '"><i>' + sub + '</i></sub></b>' +
             '<span class="meta-data">' + showBuildTime(data, level, boardName) + showBuildNumber(data, boardName) + '</span></span></div></a>');
-	}
+    }
 
-    function showBuildTime(data, level, boardName){
-        if (localStorage.getItem("showTimestamp-" + boardName) === "true"){
+    function showResultBadge(data, level, boardName) {
+        if (localStorage.getItem("showResultBadge-" + boardName) === "true") {
+            return '<span class="alert-badge-' + level + '">' + getResultBadgeValue(data) + '</span>';
+        }
+        return "";
+    }
+
+    function showBuildTime(data, level, boardName) {
+        if (localStorage.getItem("showTimestamp-" + boardName) === "true") {
             return '<span class="framework-' + level + ' glyphicon glyphicon-time"><span class="last-build">' + data.date + '</span>';
         }
         return "";
     }
 
-    function showBuildNumber(data, boardName){
-        if (localStorage.getItem("showBuildNumber-" + boardName) === "true"){
+    function showBuildNumber(data, boardName) {
+        if (localStorage.getItem("showBuildNumber-" + boardName) === "true") {
             return '<span class="build-number">#' + data.number + '</span>';
         }
         return "";
     }
 
-	function getTotalCount(data){
+    function getTotalCount(data) {
         var totalCount = 0;
         if (data.hasOwnProperty('totalCount')) {
-			return data.totalCount;
-		}
-        if (data.hasOwnProperty('passCount')){
+            return data.totalCount;
+        }
+        if (data.hasOwnProperty('passCount')) {
             totalCount = data.passCount;
         }
-        if (data.hasOwnProperty('skipCount')){
+        if (data.hasOwnProperty('skipCount')) {
             totalCount = totalCount + data.skipCount;
         }
-        if (data.hasOwnProperty('failCount')){
+        if (data.hasOwnProperty('failCount')) {
             totalCount = totalCount + data.failCount;
         }
 
         return totalCount;
 
-	}
+    }
 
     function getFailCount(data) {
         if (data.hasOwnProperty('failCount')) {
@@ -275,19 +284,19 @@ $(document).ready(function(){
     function getPassCount(data) {
         if (data.hasOwnProperty('passCount')) {
             return data.passCount;
-        } else if(getFailCount(data) == 0 && getTotalCount(data) >= 1){
+        } else if (getFailCount(data) == 0 && getTotalCount(data) >= 1) {
             return getTotalCount(data)
         }
         return 0;
     }
 
-    function getPercentage(percent, data){
+    function getPercentage(percent, data) {
         var per = (percent / 100) * getTotalCount(data);
         return per;
     }
 
-    function getResult(data){
-        if (data.hasOwnProperty("passCount") || data.hasOwnProperty("failCount") || data.hasOwnProperty("skipCount") ||data.hasOwnProperty("totalCount")){
+    function getResult(data) {
+        if (data.hasOwnProperty("passCount") || data.hasOwnProperty("failCount") || data.hasOwnProperty("skipCount") || data.hasOwnProperty("totalCount")) {
             return "hasNumbers";
         } else if (data.hasOwnProperty("result") && (data.result === "SUCCESS" || data.result === "STABLE")) {
             return "success";
@@ -302,13 +311,13 @@ $(document).ready(function(){
         }
     }
 
-    function getResultBadgeMarkUp(data){
+    function getResultBadgeValue(data) {
         var result = getResult(data);
         var showSuccessVsFail = localStorage.getItem("showSuccessVsFail-" + environment);
 
-        if (result === "hasNumbers" && showSuccessVsFail === "false"){
+        if (result === "hasNumbers" && showSuccessVsFail === "false") {
             return getFailCount(data) + '<sub>/' + getTotalCount(data) + '</sub>';
-        } else if (result === "hasNumbers" && showSuccessVsFail === "true"){
+        } else if (result === "hasNumbers" && showSuccessVsFail === "true") {
             return getPassCount(data) + '<sup>+</sup><span class="vertical"></span>' + getFailCount(data) + '<sup>-</sup>';
         } else if (result === "success") {
             return '<span class="glyphicon glyphicon-ok"></span>';
@@ -332,13 +341,12 @@ $(document).ready(function(){
     }
 
 
-
     /********************************* end alert template *********************************/
 
 
     /********************************* start configuration *********************************/
 
-    function columnSwitch(boardName){
+    function columnSwitch(boardName) {
 
         // if localStorageKeyName is true do open else do close
         var localStorageKeyName = "showOneColumn-" + boardName;
@@ -351,7 +359,7 @@ $(document).ready(function(){
         }, 1000);
 
         // switch cols
-        $('#cols').click(function(){
+        $('#cols').click(function () {
 
             $("div#alerts :nth-child(even) .alert-dashboard-two-cols").hide();
             $("div#alerts :nth-child(even) .alert-dashboard").hide();
@@ -388,6 +396,7 @@ $(document).ready(function(){
         var aborted = 'showAbortedJobs-' + boardName;
         var buildNumber = 'showBuildNumber-' + boardName;
         var successVsFail = 'showSuccessVsFail-' + boardName;
+        var resultBadge = 'showResultBadge-' + boardName;
         var buildTime = 'showTimestamp-' + boardName;
         var panelEffect = 'panelEffect-' + boardName;
         var oneCol = 'showOneColumn-' + boardName;
@@ -396,10 +405,10 @@ $(document).ready(function(){
         var panelTheme = 'panelTheme-' + boardName;
         var backgroundTheme = 'backgroundTheme-' + boardName;
 
-        if (localStorage.getItem(success) == undefined){
+        if (localStorage.getItem(success) == undefined) {
             localStorage.setItem(success, true);
         }
-        if (localStorage.getItem(building) == undefined){
+        if (localStorage.getItem(building) == undefined) {
             localStorage.setItem(building, true);
         }
         if (localStorage.getItem(aborted) == undefined) {
@@ -413,6 +422,9 @@ $(document).ready(function(){
         }
         if (localStorage.getItem(buildTime) == undefined) {
             localStorage.setItem(buildTime, true);
+        }
+        if (localStorage.getItem(resultBadge) == undefined) {
+            localStorage.setItem(resultBadge, true);
         }
         if (localStorage.getItem(oneCol) == undefined) {
             if (jobCount <= 6) {
@@ -447,15 +459,15 @@ $(document).ready(function(){
         $('select[name="background"]').val(localStorage.getItem("backgroundTheme-" + environment));
     }
 
-    function autoRefresh(){
+    function autoRefresh() {
         var interval = localStorage.getItem("reload-" + environment) * 1000;
         if (interval > 1000)
-        setTimeout(function () {
-            location.reload();
+            setTimeout(function () {
+                location.reload();
 
-            // $('#alerts').load(document.URL + ' #alerts');
+                // $('#alerts').load(document.URL + ' #alerts');
 
-        }, interval);
+            }, interval);
     }
 
     function alertEffects(boardName) {
