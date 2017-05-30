@@ -26,7 +26,8 @@ html {
 }
 
 .colSwitch,
-.boardConfig {
+.boardConfig,
+.gauges {
     position: absolute;
     bottom: 0;
     opacity: 0.5;
@@ -35,6 +36,8 @@ html {
 
 .boardConfig:hover,
 .boardConfig:focus,
+.gauges:hover,
+.gauges:focus,
 .colSwitch:hover,
 .colSwitch:focus {
     text-align: left;
@@ -1197,8 +1200,8 @@ button span.glyphicon.glyphicon-ok {
 }
 
 /*two column*/
-.glyphicon-thumbs-up:before {
-    content: "\e012";
+.glyphicon-th-large:before {
+    content: "\e010";
 }
 
 .glyphicon-cog:before {

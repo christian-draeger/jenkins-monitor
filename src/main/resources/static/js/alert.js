@@ -173,12 +173,6 @@ $(document).ready(function () {
                 danger = true;
             } else if (getTotalCount(jenkinsData) === 0) {
                 danger = true;
-            } else if (getResult(jenkinsData) === "failure") {
-                danger = true;
-            } else if (getResult(jenkinsData) === "building") {
-                danger = true;
-            } else if (getResult(jenkinsData) === "abort") {
-                danger = true;
             }
             return danger;
         }
@@ -296,9 +290,7 @@ $(document).ready(function () {
     }
 
     function getResult(data) {
-        if (data.hasOwnProperty("passCount") || data.hasOwnProperty("failCount") || data.hasOwnProperty("skipCount") || data.hasOwnProperty("totalCount")) {
-            return "hasNumbers";
-        } else if (data.hasOwnProperty("result") && (data.result === "SUCCESS" || data.result === "STABLE")) {
+        if (data.hasOwnProperty("result") && (data.result === "SUCCESS" || data.result === "STABLE")) {
             return "success";
         } else if (data.hasOwnProperty("result") && data.result === "FAILURE") {
             return "failure";
@@ -311,13 +303,30 @@ $(document).ready(function () {
         }
     }
 
+    function hasNumbers(data) {
+        if (data.hasOwnProperty("passCount")) {
+            return true;
+        }
+        if (data.hasOwnProperty("failCount")) {
+            return true;
+        }
+        if (data.hasOwnProperty("skipCount")) {
+            return true;
+        }
+        if (data.hasOwnProperty("totalCount")) {
+            return true;
+        }
+        return false;
+    }
+
     function getResultBadgeValue(data) {
         var result = getResult(data);
+        var jobHasNumbers = hasNumbers(data);
         var showSuccessVsFail = localStorage.getItem("showSuccessVsFail-" + environment);
 
-        if (result === "hasNumbers" && showSuccessVsFail === "false") {
+        if (jobHasNumbers && showSuccessVsFail === "false") {
             return getFailCount(data) + '<sub>/' + getTotalCount(data) + '</sub>';
-        } else if (result === "hasNumbers" && showSuccessVsFail === "true") {
+        } else if (jobHasNumbers && showSuccessVsFail === "true") {
             return getPassCount(data) + '<sup>+</sup><span class="vertical"></span>' + getFailCount(data) + '<sup>-</sup>';
         } else if (result === "success") {
             return '<span class="glyphicon glyphicon-ok"></span>';
@@ -351,7 +360,7 @@ $(document).ready(function () {
         // if localStorageKeyName is true do open else do close
         var localStorageKeyName = "showOneColumn-" + boardName;
 
-        $('#cols').addClass(localStorage.getItem(localStorageKeyName) == "false" ? 'glyphicon-align-justify' : 'glyphicon-thumbs-up');
+        $('#cols').addClass(localStorage.getItem(localStorageKeyName) == "false" ? 'glyphicon-align-justify' : 'glyphicon-th-large');
         $("#alerts a div").toggleClass(localStorage.getItem(localStorageKeyName) == "false" ? 'alert-dashboard-two-cols' : 'alert-dashboard');
 
         setTimeout(function () {
@@ -371,7 +380,7 @@ $(document).ready(function () {
 
             var $this = $(this);
 
-            $this.toggleClass('glyphicon-thumbs-up glyphicon-align-justify');
+            $this.toggleClass('glyphicon-th-large glyphicon-align-justify');
 
             $("#alerts a div").toggleClass('alert-dashboard alert-dashboard-two-cols');
 
