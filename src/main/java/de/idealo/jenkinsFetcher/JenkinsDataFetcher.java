@@ -52,7 +52,7 @@ public class JenkinsDataFetcher {
         jenkinsElement.setFullDisplayName(jenkinsData.getFullDisplayName());
         jenkinsElement.setId(jenkinsData.getId());
         jenkinsElement.setNumber(jenkinsData.getNumber());
-        jenkinsElement.setResult(jenkinsData.getResult());
+        jenkinsElement.setResult(getResult(jenkinsData));
         jenkinsElement.setUrl(jenkinsData.getUrl());
         jenkinsElement.setUrl(jenkinsData.getDescription());
         jenkinsElement.setBuilding(jenkinsData.isBuilding());
@@ -88,7 +88,24 @@ public class JenkinsDataFetcher {
         return body;
     }
 
+    private String getResult(JenkinsData jenkinsData) {
 
+        String result = jenkinsData.getResult();
+
+        if ("SUCCESS".equals(result) || "STABLE".equals(result)) {
+            return "success";
+        }
+        if ("FAILURE".equals(result)) {
+            return "failure";
+        }
+        if ("ABORTED".equals(result)) {
+            return "abort";
+        }
+        if (jenkinsData.isBuilding()) {
+            return "building";
+        }
+        return "error";
+    }
 
     private String formatTimestampToDate(long timestamp) {
         Date date = new Date(timestamp);

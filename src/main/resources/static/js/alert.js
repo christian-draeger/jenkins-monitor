@@ -126,7 +126,7 @@ $(document).ready(function () {
 
                 var failCount = getFailCount(jenkinsData);
                 var totalCount = getTotalCount(jenkinsData);
-                var resultStatus = getResult(jenkinsData);
+                var resultStatus = jenkinsData.result;
                 var showSuccessful = localStorage.getItem("showSuccessfulJobs-" + boardName);
                 var showBuilding = localStorage.getItem("showBuildingJobs-" + boardName);
                 var showAborted = localStorage.getItem("showAbortedJobs-" + boardName);
@@ -199,15 +199,10 @@ $(document).ready(function () {
     /********************************* start config modal *********************************/
 
     function getConfigModalHeader(boardName) {
-        $('#config-modal-header').html(getConfigIconHtmlMarkup() + boardName + '-config' + getCloseXMarkUp());
-    }
-
-    function getConfigIconHtmlMarkup() {
-        return "<span class='glyphicon glyphicon-cog'></span> ";
-    }
-
-    function getCloseXMarkUp() {
-        return "<button type='button' class='close' data-dismiss='modal'>&times;</button>";
+        var headerMarkup =  "<span class='glyphicon glyphicon-cog'></span> " +
+                            boardName + "-config" +
+                            "<button type='button' class='close' data-dismiss='modal'>&times;</button>";
+        $('#config-modal-header').html(headerMarkup);
     }
 
     /********************************* end config modal *********************************/
@@ -289,20 +284,6 @@ $(document).ready(function () {
         return per;
     }
 
-    function getResult(data) {
-        if (data.hasOwnProperty("result") && (data.result === "SUCCESS" || data.result === "STABLE")) {
-            return "success";
-        } else if (data.hasOwnProperty("result") && data.result === "FAILURE") {
-            return "failure";
-        } else if (data.hasOwnProperty("result") && data.result === "ABORTED") {
-            return "abort";
-        } else if (data.hasOwnProperty("building") && data.building == true) {
-            return "building";
-        } else if ((data.hasOwnProperty("error") && data.error === "jenkins not reachable") || Object.keys(data).length <= 1) {
-            return "error";
-        }
-    }
-
     function hasNumbers(data) {
         if (data.hasOwnProperty("passCount")) {
             return true;
@@ -320,7 +301,7 @@ $(document).ready(function () {
     }
 
     function getResultBadgeValue(data) {
-        var result = getResult(data);
+        var result = data.result;
         var jobHasNumbers = hasNumbers(data);
         var showSuccessVsFail = localStorage.getItem("showSuccessVsFail-" + environment);
 

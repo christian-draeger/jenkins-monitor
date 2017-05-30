@@ -24,6 +24,7 @@ public class JenkinsData {
     private String fullDisplayName;
     private String id;
     private String result;
+    private String error;
     private String url;
     private String fullName;
     private String description;
