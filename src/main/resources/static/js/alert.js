@@ -131,6 +131,8 @@ $(document).ready(function () {
                 var showBuilding = localStorage.getItem("showBuildingJobs-" + boardName);
                 var showAborted = localStorage.getItem("showAbortedJobs-" + boardName);
 
+                console.log(jobName + " : " + resultStatus + " - failCount = " + failCount);
+
                 if (((failCount === 0 && totalCount !== 0) || resultStatus === "success") && showSuccessful === "true") {
                     getAlertPanelTemplate(jenkinsData, "success", message, sub, jobName, jenkinsUrl, boardName);
                 }
@@ -139,7 +141,7 @@ $(document).ready(function () {
                     showNoFailingTests();
                 }
 
-                else if (failCount >= 0 || (resultStatus === "failure")) {
+                else if (failCount > 0 || resultStatus === "failure") {
                     if (isDanger(jenkinsData)) {
                         getAlertPanelTemplate(jenkinsData, "danger", message, sub, jobName, jenkinsUrl, boardName);
                     } else {
@@ -166,15 +168,13 @@ $(document).ready(function () {
 
         function isDanger(jenkinsData) {
 
-            var danger = false;
             var percentageConfig = localStorage.getItem("dangerPercentage-" + environment);
 
             if (getFailCount(jenkinsData) > getPercentage(percentageConfig, jenkinsData)) {
-                danger = true;
-            } else if (getTotalCount(jenkinsData) === 0) {
-                danger = true;
+                return true;
             }
-            return danger;
+
+            return false;
         }
 
         function getTestResults(numberOfBoard, jenkinsUrl, boardName) {
