@@ -28,4 +28,5 @@ public class JenkinsElement {
     private String description;
     private String date;
     private boolean building;
+    private boolean hasNumbers;
 }

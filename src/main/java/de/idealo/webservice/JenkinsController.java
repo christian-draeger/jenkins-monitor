@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import de.idealo.jenkinsFetcher.JenkinsDataFetcher;
+import de.idealo.jenkinsFetcher.Aggregator;
 import de.idealo.jenkinsFetcher.JenkinsElement;
 
 /**
@@ -20,13 +20,13 @@ import de.idealo.jenkinsFetcher.JenkinsElement;
 public class JenkinsController {
 
     @Autowired
-    private JenkinsDataFetcher jenkinsDataFetcher;
+    private Aggregator aggregator;
 
     @CrossOrigin
     @RequestMapping(value = "/jenkins", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public JenkinsElement jenkinsResults(
             @RequestParam(value = "job") final String jobName,
             @RequestParam(value = "jenkinsUrl") final String jenkinsUrl) throws IOException {
-        return jenkinsDataFetcher.getJenkinsData(jobName, jenkinsUrl);
+        return aggregator.getJenkinsData(jobName, jenkinsUrl);
     }
 }

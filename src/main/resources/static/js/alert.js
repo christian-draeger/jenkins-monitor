@@ -284,25 +284,9 @@ $(document).ready(function () {
         return per;
     }
 
-    function hasNumbers(data) {
-        if (data.hasOwnProperty("passCount")) {
-            return true;
-        }
-        if (data.hasOwnProperty("failCount")) {
-            return true;
-        }
-        if (data.hasOwnProperty("skipCount")) {
-            return true;
-        }
-        if (data.hasOwnProperty("totalCount")) {
-            return true;
-        }
-        return false;
-    }
-
     function getResultBadgeValue(data) {
         var result = data.result;
-        var jobHasNumbers = hasNumbers(data);
+        var jobHasNumbers = data.hasNumbers;
         var showSuccessVsFail = localStorage.getItem("showSuccessVsFail-" + environment);
 
         if (jobHasNumbers && showSuccessVsFail === "false") {
