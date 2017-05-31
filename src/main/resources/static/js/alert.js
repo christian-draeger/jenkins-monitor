@@ -131,8 +131,6 @@ $(document).ready(function () {
                 var showBuilding = localStorage.getItem("showBuildingJobs-" + boardName);
                 var showAborted = localStorage.getItem("showAbortedJobs-" + boardName);
 
-                console.log(jobName + " : " + resultStatus + " - failCount = " + failCount);
-
                 if (((failCount === 0 && totalCount !== 0) || resultStatus === "success") && showSuccessful === "true") {
                     getAlertPanelTemplate(jenkinsData, "success", message, sub, jobName, jenkinsUrl, boardName);
                 }
@@ -434,8 +432,8 @@ $(document).ready(function () {
     }
 
     function autoRefresh() {
-        var interval = localStorage.getItem("reload-" + environment) * 1000;
-        if (interval > 1000)
+        var interval = localStorage.getItem("reload-" + environment) * 60000;
+        if (interval >= 60000)
             setTimeout(function () {
                 location.reload();
 
