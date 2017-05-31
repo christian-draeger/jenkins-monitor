@@ -35,7 +35,7 @@ $(document).ready(function () {
         location.reload();
     });
 
-    $.getJSON("config.json", configJson);
+    $.getJSON(window.location.protocol + "//" + window.location.host + "/config", configJson);
 
     function configJson(config) {
 

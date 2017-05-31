@@ -22,7 +22,7 @@ import lombok.extern.slf4j.Slf4j;
 public class Aggregator {
 
     @Autowired
-    JenkinsDataFetcher jenkinsDataFetcher;
+    private JenkinsDataFetcher jenkinsDataFetcher;
 
     private static final String jenkinsTreeWithTestReport = "?passCount,skipCount,failCount,totalCount";
     private static final String jenkinsTreeWithoutTestReport = "?building,duration,fullDisplayName,id,number,result,timestamp,url,description,changeSet[items[author[fullName]]]";
@@ -99,5 +99,4 @@ public class Aggregator {
         sdf.setTimeZone(TimeZone.getTimeZone("GMT+2"));
         return sdf.format(date);
     }
-
 }
