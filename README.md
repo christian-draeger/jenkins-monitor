@@ -10,6 +10,9 @@ It is possible to create multiple boards with a separate configuration (which jo
 
 #### Installation
 * [download](https://github.com/christian-draeger/jenkins-monitor/releases) and run application
-* board will be available under ${ip.of.mashine.app.is.installed.on}:8282/test-results.html
+* place the [config file](https://github.com/christian-draeger/jenkins-monitor/blob/master/jenkinsMonitorConfig.json) in the same directory as the application (jar file)
+  * don't change the name of the file, it has to be "jenkinsMonitorConfig.json"
+* board will be available under localhost:8282/test-results.html
+  * if you want to display the board from another mashine replace localhost with the ip-address of the mashine where you're executing the jar
 
 ### [Try the live example monitor](https://christian-draeger.github.io/jenkins-monitor/)
