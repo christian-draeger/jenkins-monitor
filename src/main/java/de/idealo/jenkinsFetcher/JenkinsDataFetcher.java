@@ -29,7 +29,7 @@ public class JenkinsDataFetcher {
         String body = given(requestSpec)
                 .get(url)
                 .asString();
-        if (body.contains("HTTP Status 404")) {
+        if (body.contains("404")) {
             return "{\"error\":\"jenkins not reachable\"}";
         }
         if (body.contains("<html><")) {

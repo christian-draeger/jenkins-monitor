@@ -28,6 +28,16 @@
           "sub": "master"
         },
         {
+          "name": "SomeNoneExistingJobs",
+          "message": "non Existing Job",
+          "sub": "test"
+        },
+        {
+          "name": "JobFromExternalConfig",
+          "message": "job from external config",
+          "sub": "test"
+        },
+        {
           "name": "Packaging/job/docker/job/master",
           "message": "packaging docker",
           "sub": "master"
