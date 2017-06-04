@@ -480,6 +480,66 @@ div#alerts :nth-child(odd) .alert-dashboard-two-cols {
     padding-right: 25px;
 }
 
+.success-flower {
+    background-color: #00bc8c;
+    background-image: url(../pics/flower.gif);
+    background-blend-mode: soft-light;
+    border-color: #00a376;
+    color: #ffffff;
+    text-align: left;
+    padding-right: 25px;
+}
+
+.building-flower {
+    background-color: #666666;
+    background-image: url(../pics/flower.gif);
+    background-blend-mode: soft-light;
+    border-color: #4d4d4d;
+    color: #ffffff;
+    text-align: left;
+    padding-right: 25px;
+}
+
+.abort-flower {
+    background-color: #a6a6a6;
+    background-image: url(../pics/flower.gif);
+    background-blend-mode: soft-light;
+    border-color: #8d8d8d;
+    color: #ffffff;
+    text-align: left;
+    padding-right: 25px;
+}
+
+.info-flower {
+    background-color: #3498db;
+    background-image: url(../pics/flower.gif);
+    background-blend-mode: soft-light;
+    border-color: #3482c2;
+    color: #ffffff;
+    text-align: left;
+    padding-right: 25px;
+}
+
+.warning-flower {
+    background-color: #f39c12;
+    background-image: url(../pics/flower.gif);
+    background-blend-mode: soft-light;
+    border-color: #da8812;
+    color: #ffffff;
+    text-align: left;
+    padding-right: 25px;
+}
+
+.danger-flower {
+    background-color: #e74c3c;
+    background-image: url(../pics/flower.gif);
+    background-blend-mode: soft-light;
+    border-color: #cd4939;
+    color: #ffffff;
+    text-align: left;
+    padding-right: 25px;
+}
+
 .success-modern-stripes {
     background: repeating-linear-gradient(
             45deg,
