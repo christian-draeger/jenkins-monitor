@@ -29,13 +29,8 @@
         },
         {
           "name": "SomeNoneExistingJobs",
-          "message": "non Existing Job",
-          "sub": "test"
-        },
-        {
-          "name": "JobFromExternalConfig",
-          "message": "job from external config",
-          "sub": "test"
+          "message": "test for non Existing Job",
+          "sub": ""
         },
         {
           "name": "Packaging/job/docker/job/master",
