@@ -221,6 +221,18 @@ body {
     width: 600px;
 }
 
+.background-flowers {
+    background-image: url(../pics/flower.gif);
+    background-blend-mode: soft-light;
+    width: 200px;
+}
+
+.background-flowers2 {
+    background-image: url(../pics/flower2.gif);
+    background-blend-mode: soft-light;
+    width: 250px;
+}
+
 input[type="text"] {
     width: 10%;
     color: #ffffff;
