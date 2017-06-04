@@ -42,7 +42,7 @@ $(document).ready(function () {
         useBackgroundTheme(environment);
         columnSwitch(environment);
 
-        if (Object.keys(config.jobs).includes(environment)) {
+        if (Object.keys(config.boards).includes(environment)) {
             checkForDefaultConfigOfBoard(environment);
         }
 
@@ -51,7 +51,7 @@ $(document).ready(function () {
 
         function getBoardNames() {
             var names = [];
-            for (var key in config.jobs) {
+            for (var key in config.boards) {
                 names.push(key);
             }
             return names;
@@ -63,19 +63,19 @@ $(document).ready(function () {
         }
 
         function getNumberOfJobsForBoard(numberOfBoard) {
-            return config.jobs[getBoardName(numberOfBoard)].length;
+            return config.boards[getBoardName(numberOfBoard)].jobs.length;
         }
 
         function getJobName(index) {
-            return config.jobs[getBoardName(numberOfBoard)][index].name;
+            return config.boards[getBoardName(numberOfBoard)].jobs[index].name;
         }
 
         function getJobMessage(index) {
-            return config.jobs[getBoardName(numberOfBoard)][index].message;
+            return config.boards[getBoardName(numberOfBoard)].jobs[index].message;
         }
 
         function getJobSub(index) {
-            return config.jobs[getBoardName(numberOfBoard)][index].sub;
+            return config.boards[getBoardName(numberOfBoard)].jobs[index].sub;
         }
 
         var boards = getBoardNames();
@@ -95,15 +95,19 @@ $(document).ready(function () {
                     jobCount = getNumberOfJobsForBoard(numberOfBoard) - 1;
                     $("#job-count").html("jobCount: " + jobCount);
 
-                    var boardInfoPosition = config.jobs[boardName].length - 1;
-                    var jenkinsUrl = config.jobs[boardName][boardInfoPosition].jenkinsUrl;
+                    var jenkinsUrl = config.boards[boardName].info.jenkinsUrl;
+
+                    getAllJobsList(jenkinsUrl);
+
                     theme = localStorage.getItem("panelTheme-" + environment);
                     getTestResults(numberOfBoard, jenkinsUrl, boardName);
-                    getHeadlineOfBoard(config, boardName);
+
+                    var headline = config.boards[boardName].info.headline;
+                    $("h1").append(headline);
 
                 }
 
-                else if (!Object.keys(config.jobs).includes(environment)) {
+                else if (!Object.keys(config.boards).includes(environment)) {
 
                     $('#alerts').hide();
                     $('#noParam').html("you need to select a board:<br>");
@@ -181,17 +185,6 @@ $(document).ready(function () {
                 getJobResult(getJobName(i), getJobMessage(i), getJobSub(i), boardName, jenkinsUrl);
             }
         }
-
-
-        function getHeadlineOfBoard(config, boardName) {
-            if (localStorage.getItem("showSuccessfulJobs-" + boardName) === "false") {
-                $("h1").append("failing " + config.jobs[boardName][boardInfoPosition].h1);
-            } else {
-                $("h1").append(config.jobs[boardName][boardInfoPosition].h1);
-            }
-        }
-
-
     }
 
     /********************************* start config modal *********************************/
@@ -314,6 +307,14 @@ $(document).ready(function () {
 
 
     /********************************* end alert template *********************************/
+
+    function getAllJobsList(jenkinsUrl) {
+        var webserviceAdress = window.location.protocol + "//" + window.location.host;
+        var endpoint = webserviceAdress + "/apiRaw?jenkinsUrl=" + jenkinsUrl;
+        $.getJSON(endpoint, function (jenkinsData) {
+            var jobList = jenkinsData.jobs;
+        });
+    }
 
 
     /********************************* start configuration *********************************/

@@ -1,46 +1,42 @@
 {
-  "jobs": {
-    "jenkinsIo": [
-      {
-        "name": "Plugins/job/publish-to-bitbucket-plugin/job/master",
-        "message": "bitbucket plugin",
-        "sub": "master"
-      },
-      {
-        "name": "Plugins/job/gradle-plugin/job/master",
-        "message": "gradle plugin",
-        "sub": "master"
-      },
-      {
-        "name": "Plugins/job/viber-notification-plugin/job/master",
-        "message": "viber plugin",
-        "sub": "master"
-      },
-      {
-        "name": "Plugins/job/nunit-plugin/job/master",
-        "message": "nUnit plugin",
-        "sub": "master"
-      },
-      {
-        "name": "Plugins/job/m2release-plugin/job/master",
-        "message": "m2 release plugin",
-        "sub": "master"
-      },
-      {
-        "h1": "Jenkins.io example Board<br><span style='font-size:35px;color:#555'>(monitoring jobs of the jenkins project)</span>",
+  "boards": {
+    "jenkinsIo": {
+      "jobs": [
+        {
+          "name": "Plugins/job/publish-to-bitbucket-plugin/job/master",
+          "message": "bitbucket plugin",
+          "sub": "master"
+        },
+        {
+          "name": "Plugins/job/gradle-plugin/job/master",
+          "message": "gradle plugin",
+          "sub": "master"
+        },
+        {
+          "name": "Plugins/job/viber-notification-plugin/job/master",
+          "message": "viber plugin",
+          "sub": "master"
+        },
+        {
+          "name": "Plugins/job/nunit-plugin/job/master",
+          "message": "nUnit plugin",
+          "sub": "master"
+        },
+        {
+          "name": "Plugins/job/m2release-plugin/job/master",
+          "message": "m2 release plugin",
+          "sub": "master"
+        },
+        {
+          "name": "Packaging/job/docker/job/master",
+          "message": "packaging docker",
+          "sub": "master"
+        }
+      ],
+      "info": {
+        "headline": "Jenkins.io example Board<br><span style='font-size:35px;color:#555'>(monitoring jobs of the jenkins project)</span>",
         "jenkinsUrl": "https://ci.jenkins.io"
       }
-    ]
-  },
-  "webServiceAdress": "http://localhost:8282",
-  "danger": [
-    {
-      "percentage": 40,
-      "byPercentage": true
-    },
-    {
-      "byJobContainsString": "verify",
-      "containsString": true
     }
-  ]
+  }
 }

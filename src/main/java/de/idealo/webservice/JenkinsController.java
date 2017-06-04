@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import de.idealo.config.ConfigReader;
 import de.idealo.jenkinsFetcher.Aggregator;
 import de.idealo.jenkinsFetcher.JenkinsElement;
+import de.idealo.jenkinsFetcher.SimpleFetcher;
 
 /**
  * Created by christian.draeger on 15.01.16.
@@ -24,6 +25,8 @@ public class JenkinsController {
     private Aggregator aggregator;
     @Autowired
     private ConfigReader configReader;
+    @Autowired
+    private SimpleFetcher simpleFetcher;
 
     @CrossOrigin
     @RequestMapping(value = "/jenkins", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
@@ -37,5 +40,11 @@ public class JenkinsController {
     @RequestMapping(value = "/config", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public String jenkinsResults() {
         return configReader.getConfig();
+    }
+
+    @CrossOrigin
+    @RequestMapping(value = "/apiRaw", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    public String jenkinsResults(@RequestParam(value = "jenkinsUrl") final String jenkinsUrl) {
+        return simpleFetcher.rawFetcher(jenkinsUrl);
     }
 }
