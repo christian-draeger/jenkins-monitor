@@ -92,7 +92,7 @@ $(document).ready(function () {
                 if (location.search === "?" + boardName) {
                     $("#noParam").hide();
 
-                    jobCount = getNumberOfJobsForBoard(numberOfBoard) - 1;
+                    jobCount = getNumberOfJobsForBoard(numberOfBoard);
                     $("#job-count").html("jobCount: " + jobCount);
 
                     var jenkinsUrl = config.boards[boardName].info.jenkinsUrl;
@@ -181,7 +181,7 @@ $(document).ready(function () {
 
         function getTestResults(numberOfBoard, jenkinsUrl, boardName) {
 
-            for (var i = 0; i < getNumberOfJobsForBoard(numberOfBoard) - 1; i++) {
+            for (var i = 0; i < getNumberOfJobsForBoard(numberOfBoard); i++) {
                 getJobResult(getJobName(i), getJobMessage(i), getJobSub(i), boardName, jenkinsUrl);
             }
         }
