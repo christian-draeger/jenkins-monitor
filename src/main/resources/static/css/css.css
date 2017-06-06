@@ -222,14 +222,12 @@ body {
 }
 
 .background-flowers {
-    background-image: url(../pics/flower.gif);
-    background-blend-mode: soft-light;
+    background-image: url(../pics/flower.jpg);
     width: 200px;
 }
 
 .background-flowers2 {
-    background-image: url(../pics/flower2.gif);
-    background-blend-mode: soft-light;
+    background-image: url(../pics/flower2.jpg);
     width: 250px;
 }
 
@@ -482,7 +480,7 @@ div#alerts :nth-child(odd) .alert-dashboard-two-cols {
 
 .success-flower {
     background-color: #00bc8c;
-    background-image: url(../pics/flower.gif);
+    background-image: url(../pics/flower.jpg);
     background-blend-mode: soft-light;
     border-color: #00a376;
     color: #ffffff;
@@ -492,7 +490,7 @@ div#alerts :nth-child(odd) .alert-dashboard-two-cols {
 
 .building-flower {
     background-color: #666666;
-    background-image: url(../pics/flower.gif);
+    background-image: url(../pics/flower.jpg);
     background-blend-mode: soft-light;
     border-color: #4d4d4d;
     color: #ffffff;
@@ -502,7 +500,7 @@ div#alerts :nth-child(odd) .alert-dashboard-two-cols {
 
 .abort-flower {
     background-color: #a6a6a6;
-    background-image: url(../pics/flower.gif);
+    background-image: url(../pics/flower.jpg);
     background-blend-mode: soft-light;
     border-color: #8d8d8d;
     color: #ffffff;
@@ -512,7 +510,7 @@ div#alerts :nth-child(odd) .alert-dashboard-two-cols {
 
 .info-flower {
     background-color: #3498db;
-    background-image: url(../pics/flower.gif);
+    background-image: url(../pics/flower.jpg);
     background-blend-mode: soft-light;
     border-color: #3482c2;
     color: #ffffff;
@@ -522,7 +520,7 @@ div#alerts :nth-child(odd) .alert-dashboard-two-cols {
 
 .warning-flower {
     background-color: #f39c12;
-    background-image: url(../pics/flower.gif);
+    background-image: url(../pics/flower.jpg);
     background-blend-mode: soft-light;
     border-color: #da8812;
     color: #ffffff;
@@ -532,7 +530,7 @@ div#alerts :nth-child(odd) .alert-dashboard-two-cols {
 
 .danger-flower {
     background-color: #e74c3c;
-    background-image: url(../pics/flower.gif);
+    background-image: url(../pics/flower.jpg);
     background-blend-mode: soft-light;
     border-color: #cd4939;
     color: #ffffff;
