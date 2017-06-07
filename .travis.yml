@@ -1,8 +1,46 @@
-before_install:
-  - sudo apt-get -qq update
-  - sudo apt-get install -y lib32z1
-  - sudo apt-get install -y lib32ncurses5
-  - sudo apt-get install -y lib32bz2-1.0
 language: java
-jdk:
-  - oraclejdk8
+install: true
+
+matrix:
+  include:
+  - jdk: oraclejdk8
+
+script:
+- mvn clean install
+- mvn clean package
+
+before_deploy:
+- git config --global user.email "builds@travis-ci.com"
+- git config --global user.name "Travis CI"
+- export GIT_TAG=$TRAVIS_BRANCH-$TRAVIS_BUILD_NUMBER
+- export JAR=$(ls target/jenkins-monitor-*.jar)
+- export DEB=$(ls target/jenkins-monitor-*.deb)
+- git tag $GIT_TAG -a -m "Generated tag from TravisCI for build $TRAVIS_BUILD_NUMBER"
+- git push -q https://$TAGPERM@github.com/christian-draeger/jenkins-monitor --tags
+- ls -R
+
+branches:
+  except:
+  - "/^*-v[0-9]/"
+
+notifications:
+  email:
+    on_success: change
+    on_failure: change
+
+deploy:
+  skip_cleanup: true
+  provider: releases
+  api_key:
+    secure: [redacted]
+  file:
+    - $JAR
+    - $DEB
+  on:
+    repo: christian-draeger/jenkins-monitor
+    tags: false
+    all_branches: true
+
+env:
+  global:
+    secure: VqCYjEDrR7JiTim76oowHAvNOX37t5tU5K4WAhcyCW91grX6prUnIjk11zQSUwrM/XqT3/OyieA/Yeolxn6PYgRny865aSMFSkoS1tGoS4BVC3AUgow49s+1K9z378odZDMNoFXnWxoy/+tq6JDIZKzAPo03+hrvL4ru13aZgYjCAPkLN2y08aV3/BjK/xf1guqO1nKaFUj7S6/Rou41LHcEkknBv/IBBQI48ZATBl2DfHY81TF+3VIiWT0ifETy2P3kj/ZmzBVqEaD85AFm6pXa+r7LcSJDVxWYgkatkUbaMwLNvdQmJjw97Yp+jsWeVeeSsFZUnTigTR2CCJ60PBM4UAMdEkPAy3lOwm+YjVcGIirOrat07krnyg36ekjfqsk32ZICVifJvfGMvyU/CJUTzlGlcZfAMQZNcUgrXgDHN7VZ5E2mmKOhXc696V6+AXEMqdjMxfUuSE8h+M1VbF23DMNPLqEfkL4mS1X5WlrwMtHlDnsGlzVr6GwwlYnrtqNEe9SESGaQ+UdwAE4wcNldLlAY3jG5utuLrZ6NDtaLdaQBOPJwTJ1GLgBBxnLZxSqgUUCmlgWCptXx53+mYubzOxid/rZd8ok8CjhDPhoPxiqcnGXK4WELSC5QEJsUGsoH9mEKDyQnumEa3Ba3ObX/WPh4sX8Ps1oqEKv3//o=
