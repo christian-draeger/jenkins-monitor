@@ -16,7 +16,7 @@ before_deploy:
 - export JAR=$(ls target/jenkins-monitor-*.jar)
 - export DEB=$(ls target/jenkins-monitor-*.deb)
 - git tag $GIT_TAG -a -m "Generated tag from TravisCI for build $TRAVIS_BUILD_NUMBER"
-- git push -q https://$TAGPERM@github.com/christian-draeger/jenkins-monitor --tags
+- git push -q https://$GITPERM@github.com/christian-draeger/jenkins-monitor --tags
 - ls -R
 #branches:
 #  except:
@@ -29,8 +29,8 @@ deploy:
     - $JAR
     - $DEB
   skip_cleanup: true
-#  on:
-#    tags: true
+  on:
+    tags: true
 
 notifications:
   email:
