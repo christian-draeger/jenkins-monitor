@@ -12,15 +12,15 @@ script:
 before_deploy:
 - git config --global user.email "builds@travis-ci.com"
 - git config --global user.name "Travis CI"
-- export GIT_TAG=$TRAVIS_BRANCH-v0.3.$TRAVIS_BUILD_NUMBER
+- export GIT_TAG=$TRAVIS_BRANCH-v$TRAVIS_BUILD_NUMBER
 - export JAR=$(ls target/jenkins-monitor-*.jar)
 - export DEB=$(ls target/jenkins-monitor-*.deb)
 - git tag $GIT_TAG -a -m "Generated tag from TravisCI for build $TRAVIS_BUILD_NUMBER"
 - git push -q https://$TAGPERM@github.com/christian-draeger/jenkins-monitor --tags
 - ls -R
-branches:
-  except:
-  - "/^*-v[0-9]/"
+#branches:
+#  except:
+#  - "/^*-v[0-9]/"
 deploy:
   provider: releases
   api_key:
@@ -29,8 +29,8 @@ deploy:
     - $JAR
     - $DEB
   skip_cleanup: true
-  on:
-    tags: true
+#  on:
+#    tags: true
 
 notifications:
   email:
