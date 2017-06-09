@@ -4,7 +4,7 @@ MONTH=$(date +"%m")
 DAY=$(date +"%d")
 cd $TRAVIS_BUILD_DIR
 
-echo ${GH_TOKEN}
+echo GHTOKEN:${GH_TOKEN}
 
 #Remove Remotes Added by TravisCI
 git remote rm origin
