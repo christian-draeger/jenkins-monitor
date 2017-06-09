@@ -15,7 +15,8 @@ matrix:
 
 before_install:
   - export TZ=Europe/Berlin
-
+  - chmod +x changefile.sh
+  - chmod +x deploy.sh
 script:
   - mvn clean install
   - ./changefile.sh
