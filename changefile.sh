@@ -1,13 +1,14 @@
 #!/bin/bash
 YEAR=$(date +"%Y")
 MONTH=$(date +"%m")
+DAY=$(date +"%d")
 cd $TRAVIS_BUILD_DIR
 
 #Remove Remotes Added by TravisCI
 git remote rm origin
 
 #Add Remote with Secure Key
-git remote add origin https://${TAGPERM}@github.com/${TRAVIS_REPO_SLUG}.git
+git remote add origin https://${GITPERM}@github.com/${TRAVIS_REPO_SLUG}.git
 
 #List Remotes ONLY DURING testing - do not do this on live repo / possible key leak
 #git remote -v
@@ -23,4 +24,4 @@ git checkout master
 # Add the modified file and commit it
 git add $TRAVIS_BUILD_DIR/"${JAR}"
 git add $TRAVIS_BUILD_DIR/"${DEB}"
-git commit -am "V.$YEAR.$MONTH.$TRAVIS_BUILD_NUMBER [ci skip]"
+git commit -am "$DAY-$MONTH-$YEAR.v$TRAVIS_BUILD_NUMBER [ci skip]"

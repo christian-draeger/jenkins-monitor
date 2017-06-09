@@ -40,10 +40,10 @@ deploy:
   on:
     repo: "${TRAVIS_REPO_SLUG}"
     tags: false
-    branches:
-      except:
-        - "/^v[0-9]/"
-        - "/^V.*$/"
+#    branches:
+#      except:
+#        - "/^v[0-9]/"
+#        - "/^V.*$/"
     branches:
        only:
          - "master"
