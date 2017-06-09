@@ -9,6 +9,8 @@ env:
     - TRAVIS_REPO_SLUG: christian-draeger/jenkins-monitor
     - GIT_BRANCH: master
 
+sudo: required
+
 matrix:
   include:
   - jdk: oraclejdk8
@@ -17,13 +19,16 @@ before_install:
   - export TZ=Europe/Berlin
   - chmod +x changefile.sh
   - chmod +x deploy.sh
+
 script:
   - mvn clean install
   - ./changefile.sh
+
 before_deploy:
   - export JAR=$(ls target/jenkins-monitor-*.jar)
   - export DEB=$(ls target/jenkins-monitor-*.deb)
   - ./deploy.sh
+
 deploy:
   provider: releases
   api_key:
@@ -42,6 +47,7 @@ deploy:
     branches:
        only:
          - "master"
+
 notifications:
     email:
       on_success: change
