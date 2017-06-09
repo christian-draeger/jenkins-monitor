@@ -3,7 +3,7 @@ install: true
 
 env:
   global:
-    - secure: $GITPERM
+    - secure: WfqSSJPSSbb0LqHYJTrOndOqOrmH7DGSq6PTAErMEIC0b3IMryyxy1c5KGFS47Hr3pd9jCXYRXp8D8hYPWN1F0Oy1jRSkf4/53QFA8HdrGYe0KAc+wDOas/LPSSAAZFhqad+lKOYQKx0MGRuxAIg5l4C/ptdUK4HR2jTLsKcZ/MdmRrkGi4uKsvaa4upW+dpvOU8qncOSBgfzcBvdn51loeD69TxrH3Ug/zeJpsDF+pam9TX2+eukQgtdq7TNUA+ZjRxCBqJXl8bqT13EeeaBkUJt3ufc8PQQ8VwY+X0Xk781rEHg/qjMRxy9Bx/PIYBa+/dz412DHclY74mQvuN6grxr1gk5x/0ErC1q3YLXHaaWz6lF+5AwznNoS3DtyYvmSJhPzU9+O/ctvqGvzDvO5LCHPzX2gK7ckaH5RS9xVL6fgBVmoJED3FpyU/nC5uBD2I8leZc0POHIyTTcZ+NZYJJBX6YG17BGTlIDjyGb/xBWWSnsn5KtuoxFizrRzuJqDi4SM0Sl5KC/LjHgJPOjBspxC9SnLaXMhx6/JM1b13Fzd0ow9wx7q2TfPnldLbVVtydk6EjC+ogb64vtOlHDD6T0isGdLQ6M3SwwVAsAfe63mmvJAj4th5/oR4cQs6xWP3peeu3BGAEJ9r8oQDtoGagIDSWLSut9u4uPOJpvbc=
     - GIT_NAME: Travis CI
     - GIT_EMAIL: christian-draeger1@gmail.com
     - TRAVIS_REPO_SLUG: christian-draeger/jenkins-monitor
@@ -32,7 +32,7 @@ before_deploy:
 deploy:
   provider: releases
   api_key:
-    secure: ${GITPERM}
+    secure: ${GH_TOKEN}
   file:
     - ${JAR}
     - ${DEB}
