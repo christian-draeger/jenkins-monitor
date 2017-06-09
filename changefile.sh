@@ -7,7 +7,7 @@ cd $TRAVIS_BUILD_DIR
 git remote rm origin
 
 #Add Remote with Secure Key
-git remote add origin https://${GITPERM}@github.com/${TRAVIS_REPO_SLUG}.git
+git remote add origin https://${TAGPERM}@github.com/${TRAVIS_REPO_SLUG}.git
 
 #List Remotes ONLY DURING testing - do not do this on live repo / possible key leak
 #git remote -v

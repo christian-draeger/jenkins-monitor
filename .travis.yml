@@ -38,7 +38,7 @@ deploy:
     - ${DEB}
   skip_cleanup: true
   on:
-    repo: christian-draeger/jenkins-monitor
+    repo: "${TRAVIS_REPO_SLUG}"
     tags: false
     branches:
       except:
