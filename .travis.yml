@@ -43,7 +43,7 @@ deploy:
     tags: false
 #    branches:
 #      except:
-#        - "\d{2}-\d{2}-\d{4}.v\d{2,}"
+#        - "/.v\d{2,4}/"
     branches:
        only:
          - "master"

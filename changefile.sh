@@ -11,7 +11,7 @@ git remote rm origin
 git remote add origin https://${GITHUB_TOKEN}@github.com/${TRAVIS_REPO_SLUG}.git
 
 #List Remotes ONLY DURING testing - do not do this on live repo / possible key leak
-# git remote -v
+#git remote -v
 
 # Set Git Variables
 git config --global user.email "${GIT_EMAIL}"

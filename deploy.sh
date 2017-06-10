@@ -7,7 +7,7 @@ DAY=$(date +"%d")
 cd $TRAVIS_BUILD_DIR
 
 # Create Version Number
-export GIT_TAG=$DAY-$MONTH-$DATE.v$TRAVIS_BUILD_NUMBER
+export GIT_TAG=$DAY-$MONTH-$YEAR.v$TRAVIS_BUILD_NUMBER
 
 # Tag release
 git tag $GIT_TAG -a -m "$DAY-$MONTH-$YEAR.v$TRAVIS_BUILD_NUMBER"
