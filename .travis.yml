@@ -28,27 +28,22 @@ before_install:
 script:
   - mvn clean install
   - export JAR=$(ls target/jenkins-monitor-*.jar)
-  - echo "localized jar file under $JAR"
   - export DEB=$(ls target/jenkins-monitor-*.deb)
-  - echo "localized deb file under $DEB"
   - export EXE=$(ls target/jenkins-monitor-*.exe)
-  - echo "localized exe file under $EXE"
-  - cd $TRAVIS_BUILD_DIR
-  - git remote rm origin
-  - git remote add origin https://${GITHUB_TOKEN}@github.com/${TRAVIS_REPO_SLUG}.git
-  - git config --global user.email "${GIT_EMAIL}"
+  - cd $TRAVIS_BUILD_DIR # Make Sure we are in the Build Directory
+  - git remote rm origin # Remove Remotes Added by TravisCI
+  - git remote add origin https://${GITHUB_TOKEN}@github.com/${TRAVIS_REPO_SLUG}.git # Add Remote with Secure Key
+  - git config --global user.email "${GIT_EMAIL}" # Set Git Variables
   - git config --global user.name "${GIT_NAME}"
   - git config --global push.default simple
-  - git checkout master
-  - git add -f ${JAR} ${DEB} ${EXE}
-  - git commit -am "${VERSION} [ci skip]"
-#  - ./changefile.sh
+  - git checkout master # "Make sure we have master branch checked out
+  - git add -f ${JAR} ${DEB} ${EXE} # adding files to commit (needs -f if "target" is on .gitignore)
+  - git commit -am "${VERSION} [ci skip]" # [ci skip] required - otherwise travis would make a new build for this commit
 
 before_deploy:
-  - cd $TRAVIS_BUILD_DIR
+  - cd $TRAVIS_BUILD_DIR # Make Sure we are in the Build Directory
   - git tag ${VERSION} -am "${VERSION}"
   - sudo git push origin master && git push origin master --tags
-#  - ./deploy.sh
 
 deploy:
   provider: releases
@@ -62,9 +57,6 @@ deploy:
   on:
     repo: "${TRAVIS_REPO_SLUG}"
     tags: false
-#    branches:
-#      except:
-#        - "/.v\d{2,4}/"
     branches:
        only:
          - "master"
