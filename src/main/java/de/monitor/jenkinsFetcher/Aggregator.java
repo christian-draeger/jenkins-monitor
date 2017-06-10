@@ -1,4 +1,4 @@
-package de.idealo.jenkinsFetcher;
+package de.monitor.jenkinsFetcher;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import de.idealo.webservice.JenkinsData;
+import de.monitor.webservice.JenkinsData;
 
 import lombok.extern.slf4j.Slf4j;
 

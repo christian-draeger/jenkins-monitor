@@ -24,4 +24,5 @@ git checkout master
 # Add the modified file and commit it
 git add $TRAVIS_BUILD_DIR/"${JAR}"
 git add $TRAVIS_BUILD_DIR/"${DEB}"
+git add $TRAVIS_BUILD_DIR/"${EXE}"
 git commit -am "$DAY-$MONTH-$YEAR.v$TRAVIS_BUILD_NUMBER [ci skip]"

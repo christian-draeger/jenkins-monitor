@@ -1,4 +1,4 @@
-package de.idealo.jenkinsFetcher;
+package de.monitor.jenkinsFetcher;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

@@ -16,6 +16,10 @@ matrix:
   - jdk: oraclejdk8
 
 before_install:
+  - sudo apt-get -qq update
+  - sudo apt-get install -y lib32z1
+  - sudo apt-get install -y lib32ncurses5
+  - sudo apt-get install -y lib32bz2-1.0
   - export TZ=Europe/Berlin
   - chmod +x changefile.sh
   - chmod +x deploy.sh
@@ -27,6 +31,7 @@ script:
 before_deploy:
   - export JAR=$(ls target/jenkins-monitor-*.jar)
   - export DEB=$(ls target/jenkins-monitor-*.deb)
+  - export EXE=$(ls target/jenkins-monitor.exe)
   - ./deploy.sh
 
 deploy:

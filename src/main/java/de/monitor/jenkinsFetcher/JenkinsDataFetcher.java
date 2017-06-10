@@ -1,4 +1,4 @@
-package de.idealo.jenkinsFetcher;
+package de.monitor.jenkinsFetcher;
 
 import static com.jayway.restassured.RestAssured.given;
 import static java.lang.System.setProperty;

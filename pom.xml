@@ -175,7 +175,7 @@
                             <outfile>${project.build.directory}/${artifact-name}.exe</outfile>
                             <downloadUrl>http://java.com/download</downloadUrl>
                             <classPath>
-                                <mainClass>de.idealo.webservice.Application</mainClass>
+                                <mainClass>de.monitor.webservice.Application</mainClass>
                             </classPath>
                             <jre>
                                 <bundledJre64Bit>false</bundledJre64Bit>

@@ -1,4 +1,4 @@
-package de.idealo.webservice;
+package de.monitor.webservice;
 
 import java.io.IOException;
 
@@ -10,10 +10,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import de.idealo.config.ConfigReader;
-import de.idealo.jenkinsFetcher.Aggregator;
-import de.idealo.jenkinsFetcher.JenkinsElement;
-import de.idealo.jenkinsFetcher.SimpleFetcher;
+import de.monitor.config.ConfigReader;
+import de.monitor.jenkinsFetcher.Aggregator;
+import de.monitor.jenkinsFetcher.JenkinsElement;
+import de.monitor.jenkinsFetcher.SimpleFetcher;
 
 /**
  * Created by christian.draeger on 15.01.16.

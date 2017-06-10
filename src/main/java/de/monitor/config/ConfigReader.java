@@ -1,4 +1,4 @@
-package de.idealo.config;
+package de.monitor.config;
 
 import java.io.File;
 import java.io.InputStream;
