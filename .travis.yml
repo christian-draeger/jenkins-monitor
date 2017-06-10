@@ -20,7 +20,7 @@ before_install:
   - export VERSION=$(date +"%d-%m-%Y").v${TRAVIS_BUILD_NUMBER}
 
 script:
-  - mvn clean install
+  - mvn clean install -Prelease
   - export JAR=$(ls target/jenkins-monitor-*.jar)
   - export DEB=$(ls target/jenkins-monitor-*.deb)
   - export EXE=$(ls target/jenkins-monitor-*.exe)
