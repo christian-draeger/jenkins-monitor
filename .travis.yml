@@ -33,16 +33,27 @@ script:
   - echo "localized deb file under $DEB"
   - export EXE=$(ls target/jenkins-monitor-*.exe)
   - echo "localized exe file under $EXE"
-  - ./changefile.sh
+  - cd $TRAVIS_BUILD_DIR
+  - git remote rm origin
+  - git remote add origin https://${GITHUB_TOKEN}@github.com/${TRAVIS_REPO_SLUG}.git
+  - git config --global user.email "${GIT_EMAIL}"
+  - git config --global user.name "${GIT_NAME}"
+  - git config --global push.default simple
+  - git checkout master
+  - git add -f ${JAR} ${DEB} ${EXE}
+  - git commit -am "${VERSION} [ci skip]"
+#  - ./changefile.sh
 
 before_deploy:
-  - ./deploy.sh
+  - cd $TRAVIS_BUILD_DIR
+  - git tag ${VERSION} -am "${VERSION}"
+  - sudo git push origin master && git push origin master --tags
+#  - ./deploy.sh
 
 deploy:
   provider: releases
   api_key:
-    secure: ${GITHUB_TOKEN}
-    # how to create github token: https://help.github.com/articles/creating-a-personal-access-token-for-the-command-line/
+    secure: ${GITHUB_TOKEN} # how to create github token: https://help.github.com/articles/creating-a-personal-access-token-for-the-command-line/
   file:
     - ${JAR}
     - ${DEB}
