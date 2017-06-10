@@ -20,13 +20,13 @@ echo "Make sure we have master branch checked out in Git"
 git checkout master
 
 echo "adding $TRAVIS_BUILD_DIR/${JAR}"
-git add $TRAVIS_BUILD_DIR/${JAR}
+git add -f $TRAVIS_BUILD_DIR/${JAR} $TRAVIS_BUILD_DIR/${DEB} $TRAVIS_BUILD_DIR/${EXE}
 
-echo "adding $TRAVIS_BUILD_DIR/${DEB}"
-git add $TRAVIS_BUILD_DIR/${DEB}
+#echo "adding $TRAVIS_BUILD_DIR/${DEB}"
+#git add -f $TRAVIS_BUILD_DIR/${DEB}
 
-echo "adding $TRAVIS_BUILD_DIR/${EXE}"
-git add $TRAVIS_BUILD_DIR/${EXE}
+#echo "adding $TRAVIS_BUILD_DIR/${EXE}"
+#git add -f $TRAVIS_BUILD_DIR/${EXE}
 
 echo "commit all added files for version ${VERSION}"
 git commit -am "${VERSION} [ci skip]"
