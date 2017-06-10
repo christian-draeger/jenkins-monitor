@@ -24,15 +24,15 @@ public class Aggregator {
     @Autowired
     private JenkinsDataFetcher jenkinsDataFetcher;
 
-    private static final String jenkinsTreeWithTestReport = "?passCount,skipCount,failCount,totalCount";
-    private static final String jenkinsTreeWithoutTestReport = "?building,duration,fullDisplayName,id,number,result,timestamp,url,description,changeSet[items[author[fullName]]]";
+    private static final String JENKINS_TREE_WITH_TEST_REPORT = "?passCount,skipCount,failCount,totalCount";
+    private static final String JENKINS_TREE_WITHOUT_TEST_REPORT = "?building,duration,fullDisplayName,id,number,result,timestamp,url,description,changeSet[items[author[fullName]]]";
 
     private ObjectMapper mapper = new ObjectMapper();
 
     public JenkinsElement getJenkinsData(final String jobName, final String jenkinsUrl) throws IOException {
 
-        String jenkinsApiUrlWithTestReports = jenkinsUrl + "/job/" + jobName + "/lastBuild/testReport/api/json" + jenkinsTreeWithTestReport;
-        String jenkinsApiUrlWithoutTestReports = jenkinsUrl + "/job/" + jobName + "/lastBuild/api/json" + jenkinsTreeWithoutTestReport;
+        String jenkinsApiUrlWithTestReports = jenkinsUrl + "/job/" + jobName + "/lastBuild/testReport/api/json" + JENKINS_TREE_WITH_TEST_REPORT;
+        String jenkinsApiUrlWithoutTestReports = jenkinsUrl + "/job/" + jobName + "/lastBuild/api/json" + JENKINS_TREE_WITHOUT_TEST_REPORT;
 
         JenkinsElement jenkinsElement = new JenkinsElement();
         JenkinsData jenkinsData;

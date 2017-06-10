@@ -20,7 +20,9 @@ import lombok.extern.slf4j.Slf4j;
 @Component
 public class JenkinsDataFetcher {
 
-    public String getResponseAsString(final String url) {
+    private static final String ERROR_JSON_AS_STRING = "{\"error\":\"jenkins not reachable\"}";
+
+    String getResponseAsString(String url) {
 
         setProperty("javax.net.ssl.trustStore", "/etc/ssl/certs/java/cacerts");
 
@@ -30,13 +32,18 @@ public class JenkinsDataFetcher {
         Response response = given(requestSpec)
                 .get(url);
 
-        if (response.getStatusCode() == 404) {
-            return "{\"error\":\"jenkins not reachable\"}";
+        if (response.getStatusCode() == 404 || response.getStatusCode() == 500) {
+            return ERROR_JSON_AS_STRING;
         }
 
         String bodyAsString = response.asString();
 
+        if (bodyAsString.contains("Redirects from ci.jenkins.io")) {
+            return ERROR_JSON_AS_STRING;
+        }
+
         if (bodyAsString.contains("<html><")) {
+            log.error("expected json but got html");
             return "{}";
         }
         return bodyAsString;
