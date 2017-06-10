@@ -1,7 +1,5 @@
 #!/bin/bash
-YEAR=$(date +"%Y")
-MONTH=$(date +"%m")
-DAY=$(date +"%d")
+export DATE=$(date +"%d-%m-%Y")
 cd $TRAVIS_BUILD_DIR
 
 #Remove Remotes Added by TravisCI
@@ -24,4 +22,4 @@ git checkout master
 # Add the modified file and commit it
 git add $TRAVIS_BUILD_DIR/"${JAR}"
 git add $TRAVIS_BUILD_DIR/"${DEB}"
-git commit -am "$DAY-$MONTH-$YEAR.v$TRAVIS_BUILD_NUMBER [ci skip]"
+git commit -am "$DATE.v$TRAVIS_BUILD_NUMBER [ci skip]"

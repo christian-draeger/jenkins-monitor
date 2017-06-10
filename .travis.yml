@@ -41,9 +41,9 @@ deploy:
   on:
     repo: "${TRAVIS_REPO_SLUG}"
     tags: false
-#    branches:
-#      except:
-#        - "/.v\d{2,4}/"
+    branches:
+      except:
+        - "/\d{2}-\d{2}-\d{4}.v\d{2,}/"
     branches:
        only:
          - "master"
