@@ -1,25 +1,21 @@
 language: java
 install: true
+sudo: required
 
 env:
   global:
     - secure: WfqSSJPSSbb0LqHYJTrOndOqOrmH7DGSq6PTAErMEIC0b3IMryyxy1c5KGFS47Hr3pd9jCXYRXp8D8hYPWN1F0Oy1jRSkf4/53QFA8HdrGYe0KAc+wDOas/LPSSAAZFhqad+lKOYQKx0MGRuxAIg5l4C/ptdUK4HR2jTLsKcZ/MdmRrkGi4uKsvaa4upW+dpvOU8qncOSBgfzcBvdn51loeD69TxrH3Ug/zeJpsDF+pam9TX2+eukQgtdq7TNUA+ZjRxCBqJXl8bqT13EeeaBkUJt3ufc8PQQ8VwY+X0Xk781rEHg/qjMRxy9Bx/PIYBa+/dz412DHclY74mQvuN6grxr1gk5x/0ErC1q3YLXHaaWz6lF+5AwznNoS3DtyYvmSJhPzU9+O/ctvqGvzDvO5LCHPzX2gK7ckaH5RS9xVL6fgBVmoJED3FpyU/nC5uBD2I8leZc0POHIyTTcZ+NZYJJBX6YG17BGTlIDjyGb/xBWWSnsn5KtuoxFizrRzuJqDi4SM0Sl5KC/LjHgJPOjBspxC9SnLaXMhx6/JM1b13Fzd0ow9wx7q2TfPnldLbVVtydk6EjC+ogb64vtOlHDD6T0isGdLQ6M3SwwVAsAfe63mmvJAj4th5/oR4cQs6xWP3peeu3BGAEJ9r8oQDtoGagIDSWLSut9u4uPOJpvbc=
-    - GIT_NAME: Travis CI
-    - GIT_EMAIL: christian-draeger1@gmail.com
     - TRAVIS_REPO_SLUG: christian-draeger/jenkins-monitor
-    - GIT_BRANCH: master
-
-sudo: required
 
 matrix:
   include:
   - jdk: oraclejdk8
 
 before_install:
-  - sudo apt-get -qq update
-  - sudo apt-get install -y lib32z1
-  - sudo apt-get install -y lib32ncurses5
-  - sudo apt-get install -y lib32bz2-1.0
+  - sudo apt-get -qq update # needed by launch4j plugin
+  - sudo apt-get install -y lib32z1 # needed by launch4j plugin
+  - sudo apt-get install -y lib32ncurses5 # needed by launch4j plugin
+  - sudo apt-get install -y lib32bz2-1.0 # needed by launch4j plugin
   - export TZ=Europe/Berlin
   - export VERSION=$(date +"%d-%m-%Y").v${TRAVIS_BUILD_NUMBER}
 
@@ -31,8 +27,8 @@ script:
   - cd $TRAVIS_BUILD_DIR # Make Sure we are in the Build Directory
   - git remote rm origin # Remove Remotes Added by TravisCI
   - git remote add origin https://${GITHUB_TOKEN}@github.com/${TRAVIS_REPO_SLUG}.git # Add Remote with Secure Key
-  - git config --global user.email "${GIT_EMAIL}" # Set Git Variables
-  - git config --global user.name "${GIT_NAME}"
+  - git config --global user.email christian-draeger1@gmail.com # Set Git Variables
+  - git config --global user.name Travis CI
   - git config --global push.default simple
   - git checkout master # "Make sure we have master branch checked out
   - git add -f ${JAR} ${DEB} ${EXE} # adding files to commit (needs -f if "target" is on .gitignore)
