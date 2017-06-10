@@ -21,17 +21,21 @@ before_install:
   - sudo apt-get install -y lib32ncurses5
   - sudo apt-get install -y lib32bz2-1.0
   - export TZ=Europe/Berlin
+  - export VERSION=$(date +"%d-%m-%Y").v${TRAVIS_BUILD_NUMBER}
   - chmod +x changefile.sh
   - chmod +x deploy.sh
 
 script:
   - mvn clean install
+  - export JAR=$(ls target/jenkins-monitor-*.jar)
+  - echo "localized jar file under $JAR"
+  - export DEB=$(ls target/jenkins-monitor-*.deb)
+  - echo "localized deb file under $DEB"
+  - export EXE=$(ls target/jenkins-monitor-*.exe)
+  - echo "localized exe file under $EXE"
   - ./changefile.sh
 
 before_deploy:
-  - export JAR=$(ls target/jenkins-monitor-*.jar)
-  - export DEB=$(ls target/jenkins-monitor-*.deb)
-  - export EXE=$(ls target/jenkins-monitor.exe)
   - ./deploy.sh
 
 deploy:
