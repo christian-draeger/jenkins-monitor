@@ -1,5 +1,5 @@
 #!/bin/bash
-export DATE=$(date +"%d-%m-%Y")
+DATE=$(date +"%d-%m-%Y")
 cd $TRAVIS_BUILD_DIR
 
 #Remove Remotes Added by TravisCI
@@ -7,9 +7,6 @@ git remote rm origin
 
 #Add Remote with Secure Key
 git remote add origin https://${GITHUB_TOKEN}@github.com/${TRAVIS_REPO_SLUG}.git
-
-#List Remotes ONLY DURING testing - do not do this on live repo / possible key leak
-#git remote -v
 
 # Set Git Variables
 git config --global user.email "${GIT_EMAIL}"

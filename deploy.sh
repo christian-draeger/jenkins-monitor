@@ -1,7 +1,5 @@
 #!/bin/bash
-#YEAR=$(date +"%Y")
-#MONTH=$(date +"%m")
-#DAY=$(date +"%d")
+DATE=$(date +"%d-%m-%Y")
 
 # Make Sure we are in the Build Directory
 cd $TRAVIS_BUILD_DIR
