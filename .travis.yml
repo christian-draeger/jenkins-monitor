@@ -46,14 +46,14 @@ deploy:
   file:
     - ${JAR}
     - ${DEB}
-    - %{EXE}
+    - ${EXE}
   skip_cleanup: true
   on:
     repo: "${TRAVIS_REPO_SLUG}"
     tags: false
-    branches:
-      except:
-        - "/.v\d{2,4}/"
+#    branches:
+#      except:
+#        - "/.v\d{2,4}/"
     branches:
        only:
          - "master"
