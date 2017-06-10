@@ -22,8 +22,6 @@ before_install:
   - sudo apt-get install -y lib32bz2-1.0
   - export TZ=Europe/Berlin
   - export VERSION=$(date +"%d-%m-%Y").v${TRAVIS_BUILD_NUMBER}
-  - chmod +x changefile.sh
-  - chmod +x deploy.sh
 
 script:
   - mvn clean install
