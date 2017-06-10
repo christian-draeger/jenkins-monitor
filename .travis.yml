@@ -32,7 +32,8 @@ before_deploy:
 deploy:
   provider: releases
   api_key:
-    secure: ${GH_TOKEN}
+    secure: ${GITHUB_TOKEN}
+    # how to create github token: https://help.github.com/articles/creating-a-personal-access-token-for-the-command-line/
   file:
     - ${JAR}
     - ${DEB}
@@ -42,8 +43,7 @@ deploy:
     tags: false
 #    branches:
 #      except:
-#        - "/^v[0-9]/"
-#        - "/^V.*$/"
+#        - "/.v\d{2,4}/"
     branches:
        only:
          - "master"
