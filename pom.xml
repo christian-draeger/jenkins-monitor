@@ -7,7 +7,7 @@
 
     <groupId>org.springframework</groupId>
     <artifactId>jenkins-monitor</artifactId>
-    <version>0.3.2</version>
+    <version>0.3.3</version>
 
     <parent>
         <groupId>org.springframework.boot</groupId>
@@ -88,7 +88,7 @@
                             <goal>jdeb</goal>
                         </goals>
                         <configuration>
-                            <deb>${project.build.directory}/jenkins-monitor-${version}.deb</deb>
+                            <deb>${project.build.directory}/${artifactId}-${version}.deb</deb>
                             <verbose>true</verbose>
                             <controlDir>${project.build.directory}/classes/deb/control</controlDir>
                             <dataSet>
@@ -172,7 +172,7 @@
                         <configuration>
                             <headerType>console</headerType>
                             <jar>${project.build.directory}/${artifact-name}-${version}.${project.packaging}</jar>
-                            <outfile>${project.build.directory}/${artifact-name}.exe</outfile>
+                            <outfile>${project.build.directory}/${artifactId}-${version}.exe</outfile>
                             <downloadUrl>http://java.com/download</downloadUrl>
                             <classPath>
                                 <mainClass>de.monitor.webservice.Application</mainClass>
@@ -181,8 +181,9 @@
                                 <bundledJre64Bit>false</bundledJre64Bit>
                                 <bundledJreAsFallback>false</bundledJreAsFallback>
                                 <minVersion>1.7.0</minVersion>
+                                <maxVersion>1.8.0</maxVersion>
                                 <jdkPreference>preferJre</jdkPreference>
-                                <runtimeBits>32</runtimeBits>
+                                <runtimeBits>64/32</runtimeBits>
                             </jre>
                             <versionInfo>
                                 <fileVersion>${project.version}.0</fileVersion>
