@@ -178,10 +178,13 @@
                                 </goals>
                                 <configuration>
                                     <headerType>console</headerType>
-                                    <jar>${project.build.directory}/${artifact-name}-${version}.${project.packaging}
-                                    </jar>
+                                    <jar>${project.build.directory}/${artifact-name}-${version}.${project.packaging}</jar>
                                     <outfile>${project.build.directory}/${artifactId}-${version}.exe</outfile>
-                                    <downloadUrl>http://java.com/download</downloadUrl>
+                                    <dontWrapJar>true</dontWrapJar>
+                                    <errTitle>${artifact-name}: error</errTitle>
+                                    <downloadUrl>http://localhost:8585/test-results.html</downloadUrl>
+                                    <supportUrl>https://github.com/christian-draeger/jenkins-monitor</supportUrl>
+                                    <icon>src/main/resources/static/favicon-96x96.png</icon>
                                     <classPath>
                                         <mainClass>de.monitor.webservice.Application</mainClass>
                                     </classPath>
@@ -201,9 +204,17 @@
                                         <productVersion>${project.version}.0</productVersion>
                                         <txtProductVersion>${project.version}.0</txtProductVersion>
                                         <productName>${project.name}</productName>
-                                        <internalName>AppName</internalName>
+                                        <internalName>${project.name}</internalName>
                                         <originalFilename>${artifactId}.exe</originalFilename>
+                                        <language>ENGLISH_UK|ENGLISH_US</language>
                                     </versionInfo>
+                                    <messages>
+                                        <startupErr>${artifact-name}: startup failed</startupErr>
+                                        <bundledJreErr>${artifact-name}: bundled JRE error</bundledJreErr>
+                                        <jreVersionErr>${artifact-name}: JRE version Error</jreVersionErr>
+                                        <launcherErr>${artifact-name}: launcher error</launcherErr>
+                                        <instanceAlreadyExistsMsg>already running. open http://localhost:8585/test-results.html</instanceAlreadyExistsMsg>
+                                    </messages>
                                 </configuration>
                             </execution>
                         </executions>
