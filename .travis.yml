@@ -23,7 +23,7 @@ script:
   - mvn clean install -Prelease
   - export JAR=$(ls target/jenkins-monitor-*.jar)
   - export DEB=$(ls target/jenkins-monitor-*.deb)
-  - export EXE=$(ls target/jenkins-monitor-*.exe)
+#  - export EXE=$(ls target/jenkins-monitor-*.exe)
   - cd $TRAVIS_BUILD_DIR # Make Sure we are in the Build Directory
   - git remote rm origin # Remove Remotes Added by TravisCI
   - git remote add origin https://${GITHUB_TOKEN}@github.com/${TRAVIS_REPO_SLUG}.git # Add Remote with Secure Key
@@ -31,7 +31,7 @@ script:
   - git config --global user.name Travis CI
   - git config --global push.default simple
   - git checkout master # "Make sure we have master branch checked out
-  - git add -f ${JAR} ${DEB} ${EXE} # adding files to commit (needs -f if "target" is on .gitignore)
+  - git add -f ${JAR} ${DEB} #${EXE} # adding files to commit (needs -f if "target" is on .gitignore)
   - git commit -am "${VERSION} [ci skip]" # [ci skip] required - otherwise travis would make a new build for this commit
 
 before_deploy:
@@ -46,7 +46,7 @@ deploy:
   file:
     - ${JAR}
     - ${DEB}
-    - ${EXE}
+#   - ${EXE}
   skip_cleanup: true
   on:
     repo: "${TRAVIS_REPO_SLUG}"
