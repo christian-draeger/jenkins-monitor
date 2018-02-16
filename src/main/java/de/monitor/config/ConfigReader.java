@@ -31,7 +31,8 @@ public class ConfigReader implements ResourceLoaderAware {
     }
 
     private Resource getExternalConfig() {
-        String pathToExternalConfig = "file:" + new File("jenkinsMonitorConfig.json").getAbsolutePath();
-        return resourceLoader.getResource(pathToExternalConfig);
+        File file = new File("jenkinsMonitorConfig.json");
+        String pathToExternalConfig = file.exists() ? file.getAbsolutePath() : new File("./config/jenkinsMonitorConfig.json").getAbsolutePath();
+        return resourceLoader.getResource("file:" + pathToExternalConfig);
     }
 }
